@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 17:42:28 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 18:42:52 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/25 16:19:56 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/30 19:03:42 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-int	ft_atoi(const char *nptr)
+t_list	*ft_lstnew(int content)
 {
-	int	result;
-	int	negative;	
+	t_list	*list;
 
-	result = 0;
-	negative = 1;
-	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
-		nptr++;
-	if (*nptr == '-')
-	{
-		nptr++;
-		negative = -1;
-	}
-	else if (*nptr == '+')
-		nptr++;
-	while (ft_isdigit(*nptr))
-	{
-		result *= 10;
-		result += *nptr - 48;
-		nptr++;
-	}
-	result *= negative;
-	return (result);
+	list = malloc(sizeof(t_list));
+	list->content = content;
+	list->next = NULL;
+	return (list);
 }

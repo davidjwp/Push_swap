@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_list.c                                       :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -29,27 +29,35 @@ int	ft_strcmp(char *str1, char *str2)
 	return (sum1 - sum2);
 }
 
-int nodbls(char *str, char **list, int argc)
+int check_doubles(char *str, char **list, int argc, int pos)
 {
 	int	index;
 
-	index = 0;
-	while (ft_strcmp(str, list[++index]))
+	index = 1;
+	if (index == pos)
+		index++;
+	while (ft_strcmp(str, list[index]))
+	{
+		if (index == pos)
+		index++;
+	}
 	if (index == argc)
 		return(1);
 	return (0);
 }
 
-int	check_for_digit(char *str)
+int	check_digit(char *str)
 {
 	int index;
 
 	index = 0;
+	if (!str)
+		return (0);
 	while (str[index] >= 48 && str[index] <= 57)
 	{
-		if (!str[index])
-		return (1);
 		index++;
+		if (!str[index])
+			return (1);
 	}
 	return (0);
 }
@@ -58,13 +66,14 @@ int check_input(int argc, char **argv)
 {
 	int i;
 
-	i = 0;
-	while (check_for_digit(argv[++i]))
+	i = 1;
+	while (check_digit(argv[i]))
+		i++;
 	if (i == argc)
-		i = 0;
+		i = 1;
 	else
 		return (0);
-	while (nodbls(argv[i], argv, argc))
+	while (check_doubles(argv[i], argv, argc, i))
 		i++;
 	if (i == argc)
 		return (1);

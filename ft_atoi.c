@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 16:56:45 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 19:18:43 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/14 17:42:28 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/30 18:42:52 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_atoi(const char *nptr)
 {
-	unsigned int	lenght;
+	int	result;
+	int	negative;	
 
-	lenght = 0;
-	while (s[lenght])
-		lenght++;
-	return (lenght);
+	result = 0;
+	negative = 1;
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-')
+	{
+		nptr++;
+		negative = -1;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (ft_isdigit(*nptr))
+	{
+		result *= 10;
+		result += *nptr - 48;
+		nptr++;
+	}
+	result *= negative;
+	return (result);
 }

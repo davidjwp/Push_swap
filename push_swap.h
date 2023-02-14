@@ -36,7 +36,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 size_t	ft_strlen(const char *s);
 int check_input(int argc, char **argv);
-
+int	ft_isdigit(unsigned char c);
 
 
 #endif

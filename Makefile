@@ -10,11 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= libpush_swap.a
-SRCS		= utils/ft_atoi.c utils/ft_lstadd_back.c utils/ft_strlen.c utils/ft_lstlast.c utils/ check_list.c check_list.c \
-			push_swap.c
+NAME 		= run
 
-OBJS		= $(SRCS:.c=.o)
+SRCS		= ft_lstnew.c ft_atoi.c ft_lstadd_back.c ft_isdigit.c ft_strlen.c ft_lstlast.c check_input.c 
 
 CC		= gcc
 CFLAGS		= -Wall -Wextra -Werror
@@ -22,11 +20,10 @@ CFLAGS		= -Wall -Wextra -Werror
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-all: $(NAME)
-	$(CC) $(CFLAGS) -p $(NAME) -o run
+all: $(NAME) 
 
-$(NAME): $(OBJS)
-	ar rc $@ $(OBJS) && ranlib $@
+$(NAME): 
+	$(CC) $(CFLAGS) -g $(SRCS) push_swap.c -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

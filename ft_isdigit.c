@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 16:19:56 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 19:03:42 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/08 15:26:54 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/08 15:31:56 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-t_list	*ft_lstnew(int content)
+int	ft_isdigit(unsigned char c)
 {
-	t_list	*list;
-
-	list = malloc(sizeof(t_list));
-	list->content = content;
-	list->next = NULL;
-	return (list);
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
 }
