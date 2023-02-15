@@ -12,7 +12,7 @@
 
 NAME 		= run
 
-SRCS		= ft_lstnew.c ft_atoi.c ft_lstadd_back.c ft_isdigit.c ft_strlen.c ft_lstlast.c check_input.c 
+SRCS		= ft_lstnew.c ft_atoi.c ft_lstadd_back.c ft_isdigit.c ft_lstlast.c check_input.c 
 
 CC		= gcc
 CFLAGS		= -Wall -Wextra -Werror
