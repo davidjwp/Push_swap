@@ -12,46 +12,76 @@
 
 #include "push_swap.h"
 
-//start test function
-void lstclear(t_list **lst)
+//clear list from start
+/*
+void ft_lstclear_start(t_list **lst)
 {
-	while ((*lst)->previous)
+	while ((*lst)->next)
 	{
-		*lst = (*lst)->previous;
+		*lst = (*lst)->next;
+		free((*lst)->prev);
+	}
+	return(free(*lst), free(lst));
+}
+*/
+
+//clear list from end
+
+void ft_lstclear_end(t_list **lst)
+{
+	while ((*lst)->prev)
+	{
+		*lst = (*lst)->prev;
 		free((*lst)->next);
 	}
-	return;
+	return(free(*lst), free(lst));
 }
-//end
+
 
 int main(int argc, char **argv)
 {
-	int	i;
+	int	index;
 
 	t_list	**lsta = malloc(sizeof(t_list));
-	//t_list	**lstb = malloc(sizeof(t_list));
-	i = 0;
+	t_list	**lstb = malloc(sizeof(t_list));
+	index = 0;
 	if (argc < 2 || !check_input(argc, argv))
 		return (write(2, "error", 5), 0);
-	while (++i < argc)
-		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[i])));
-	if (argc > 3)
-	{
-
-	}
+	while (++index < argc)
+		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index])));
+	if (argc < 4)
+		sort_3(lsta, lstb);
+	else if (argc < 6)
+		sort_5();
+	else if (argc < 101)
+		sort_100();
 	else 
-	//start ouput list
+		sort_500();
+	//start ouput list forward
 	i = argc;
-	ft_lstlast(*lsta);
 	while (--i)
 	{
 		printf("%d\n",(*lsta)->content);
-		if ((*lsta)->previous != NULL)
-			*lsta = (*lsta)->previous;
+		if ((*lsta)->next != NULL)
+			*lsta = (*lsta)->next;
 		else
 			break;
 	}
-	lstclear(lsta);
-	//end
+	ft_lstclear_end(lsta);
+	
+	//start output list backwards
+	/*
+	while ((*lsta)->next != NULL)
+		*lsta = (*lsta)->next;
+	while (--i)
+	{
+		printf("%d\n",(*lsta)->content);
+		if ((*lsta)->prev != NULL)
+			*lsta = (*lsta)->prev;
+		else
+			break;
+	}
+	ft_lstclear_start(lsta);
+	*/
 	return (0);
 }

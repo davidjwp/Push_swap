@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= run
+NAME 		= exec
 
 SRCS		= ft_lstnew.c ft_atoi.c ft_lstadd_back.c ft_isdigit.c ft_lstlast.c check_input.c 
 

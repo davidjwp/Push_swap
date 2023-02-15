@@ -14,10 +14,11 @@
 
 t_list	*ft_lstnew(int content)
 {
-	t_list	*list;
+	t_list	*node;
 
-	list = malloc(sizeof(t_list));
-	list->content = content;
-	list->next = NULL;
-	return (list);
+	node = malloc(sizeof(t_list));
+	node->value = content;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
 }

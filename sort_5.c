@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   sort_5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 16:11:04 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/29 12:08:17 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/15 16:34:35 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/15 16:34:37 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*ft_lstlast(t_list *node)
+void    sort_5(t_list **lsta, t_list **lstb)
 {
-	if (!node)
-		return (node);
-	while (node->next)
-		node = node->next;
-	return (node);
+    
 }

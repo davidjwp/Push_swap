@@ -18,11 +18,28 @@
 #include<stddef.h>
 #include <stdlib.h>
 
-typedef struct s_list
+#define SA "\nsa"
+#define SB "\nsb"
+#define SS "\nss"
+#define PA "\npa"
+#define PB "\npb"
+#define RA "\nra"
+#define RB "\nrb"
+#define RR "\nrr"
+#define RRA "\nrra"
+#define RRB "\nrrb"
+#define RRR "\nrrr"
+
+#define UPA lsta = (*lsta)->prev
+#define UPB	lstb = (*lstb)->prev
+#define DOWNA lsta = (*lsta)->next
+#define DOWNB lstb = (*lstb)->next
+
+typedef struct node
 {
-	struct s_list   *previous;
-    int	            content;
-	struct s_list	*next;
+	struct node *prev;
+	int			value;
+	struct node	*next;
 }			t_list;
 
 /*big struct for the operations or macros*/
@@ -31,6 +48,7 @@ t_list	*ft_lstnew(int content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 int	ft_atoi(const char *nptr);
 t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstfirst(t_list *node);
 
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));

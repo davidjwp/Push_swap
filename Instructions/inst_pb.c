@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   inst_pb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 16:11:04 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/29 12:08:17 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/15 18:10:37 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/15 18:10:38 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
-t_list	*ft_lstlast(t_list *node)
+void	inst_pa(t_list **lsta, t_list **lstb)
 {
-	if (!node)
-		return (node);
-	while (node->next)
-		node = node->next;
-	return (node);
+	t_list *swap;
+
+	(*lstb)->prev = *lsta;
+	DOWNA;
+	(*lsta)->prev = NULL;
+	swap = *lstb;
+	UPB;
+	(*lstb)->next = swap;
 }
