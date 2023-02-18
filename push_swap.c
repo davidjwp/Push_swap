@@ -44,19 +44,22 @@ int main(int argc, char **argv)
 
 	t_list	**lsta = malloc(sizeof(t_list));
 	t_list	**lstb = malloc(sizeof(t_list));
+	t_inst	**instructions = malloc(sizeof(t_inst));
 	index = 0;
 	if (argc < 2 || !check_input(argc, argv))
 		return (write(2, "error", 5), 0);
 	while (++index < argc)
 		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index])));
 	if (argc < 4)
-		sort_3(lsta, lstb);
-	else if (argc < 6)
-		sort_5();
+		return(sort_3(lsta, lstb), 0);
+	/*else if (argc < 6)
+		return(sort_5(), 0);
 	else if (argc < 101)
-		sort_100();
+		return (sort_100(), 0);
 	else 
-		sort_500();
+		return(sort_500(), 0);*/
+	//end main in 17 lines
+	
 	//start ouput list forward
 	i = argc;
 	while (--i)

@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_pa.c                                          :+:      :+:    :+:   */
+/*   inst_add_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 17:45:29 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 17:45:31 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/18 18:17:28 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/18 18:17:30 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-void	inst_pa(t_list **lsta, t_list **lstb, inst_list **instruction)
+void    inst_add_back(t_inst **instlst, t_inst *new_inst)
 {
-	t_list *swap;
-
-	(*lsta)->prev = *lstb;
-	DOWNB;
-	(*lstb)->prev = NULL;
-	swap = *lsta;
-	UPA;
-	(*lsta)->next = swap;
-	inst_add_back(instruction , add_inst(instruction, PA));
+	if (*instlst == NULL)
+		*instlst = new_inst;
+	else
+	{
+        while ((*instlst)->next != NULL)
+            *instlst = (*instlst)->next;
+		(*instlst)->next = new_inst;
+		(*instlst)->prev = ;
+	}
 }

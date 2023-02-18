@@ -42,6 +42,20 @@ typedef struct node
 	struct node	*next;
 }			t_list;
 
+typedef struct inst_list
+{
+	struct inst_list *prev;
+	char			*set;
+	struct inst_list *next;
+}	t_inst;
+
+typedef struct range
+{
+	int	highest;
+	int	lowest;
+} t_range;
+
+
 /*big struct for the operations or macros*/
 
 t_list	*ft_lstnew(int content);

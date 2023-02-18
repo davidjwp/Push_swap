@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_pa.c                                          :+:      :+:    :+:   */
+/*   compare_instructions.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 17:45:29 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 17:45:31 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/18 13:10:53 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/18 13:10:55 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+//WORK IN PROGRESS
+#include"push_swap.h"
 
-void	inst_pa(t_list **lsta, t_list **lstb, inst_list **instruction)
+int	cmp_swap(t_list **lsta)
 {
-	t_list *swap;
+	int n;
 
-	(*lsta)->prev = *lstb;
-	DOWNB;
-	(*lstb)->prev = NULL;
-	swap = *lsta;
-	UPA;
-	(*lsta)->next = swap;
-	inst_add_back(instruction , add_inst(instruction, PA));
+	n = (*lsta)->value;
+	DOWNA;
+	if (n > (*lsta)->value)
+	{
+		UPA;
+		return (1);
+	}
+	else
+	{
+		UPA;
+		return (2);
+	}	
 }
+
+int	cmp_

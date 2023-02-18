@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ints_rrb.c                                         :+:      :+:    :+:   */
+/*   check_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:36:27 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 18:36:28 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/18 12:43:05 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/18 12:43:07 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include"push_swap.h"
 
-//check for that
-void	inst_rra(t_list **lsta)
+int	check_sort(t_list **lsta)
 {
-	int swap1;
-	int swap2;
-    
-    ft_lstlast(*lsta);
-	while ((*lsta)->prev != NULL)
+	int	checker;
+
+	while ((*lsta)->next != NULL)
 	{
-		swap1 = (*lsta)->value;
-		UPA;
-		swap2 = (*lsta)->value;
-		(*lsta)->value = swap1;
+		checker = (*lsta)->value;
 		DOWNA;
-		(*lsta)->value = swap2;
-		UPA;
+		if (checker > (*lsta)->value)
+			return (0);
 	}
+	ft_lstfirst(lsta);
+	return (1);
 }

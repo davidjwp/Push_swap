@@ -13,7 +13,36 @@
 
 #include "push_swap.h"
 
-void sort_3( t_list **lsta, t_list **lstb)
+t_range	get_range(t_range range, t_list **lsta)
 {
+	range.highest = (*lsta)->value;
+	range.lowest = (*lsta)->value;
+	while ((*lsta)->next != NULL)
+	{
+		DOWNA;
+		if ((*lsta)->value > highest)
+			highest = (*lsta)->value;
+		else if ((*lsta)->value < lowest)
+			lowest = (*lsta)->value;
+	}
+	ft_lstfirst(*lsta);
+	return (range)
+}
 
+void sort_3( t_list **lsta, t_list **lstb, t_inst instruction)
+{
+	t_range range;
+	
+	range = get_range(range, lsta);
+	while (!check_sort(lsta))
+	{
+		if ((*lsta)->value == range.highest)
+		{
+			DOWNA;
+			if ((*lsta)->value == range.lowest)
+			{
+				return(inst_ra());
+			}
+		}
+	}
 }
