@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 t_list	*ft_lstfirst(t_list *node)
 {
 	if (!node)
 		return (node);
-	while (node->prev)
+	while (node->prev != NULL)
 		node = node->prev;
 	return (node);
 }

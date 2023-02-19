@@ -12,15 +12,19 @@
 
 #include "../push_swap.h"
 
-void	inst_sa(t_list **lsta)
+t_inst	**inst_sa(t_list **lsta, t_inst **instructions)
 {
 	int swap1;
 	int	swap2;
-
+	//segfault right here with 1 3 2 for some reason 
 	swap1 = (*lsta)->value;
 	DOWNA;
 	swap2 = (*lsta)->value;
 	(*lsta)->value = swap1;
 	UPA;
 	(*lsta)->value = swap2;
+	inst_add_back(instructions , add_inst(SA));
+	while ((*instructions)->prev != NULL)
+		*instructions = (*instructions)->prev;
+	return (instructions);
 }

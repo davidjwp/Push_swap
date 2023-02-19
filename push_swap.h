@@ -16,24 +16,25 @@
 #include<unistd.h>
 #include<stdio.h>
 #include<stddef.h>
-#include <stdlib.h>
+#include<stdlib.h>
+#include"utils/ft_printf/ft_printf.h"
 
-#define SA "\nsa"
-#define SB "\nsb"
-#define SS "\nss"
-#define PA "\npa"
-#define PB "\npb"
-#define RA "\nra"
-#define RB "\nrb"
-#define RR "\nrr"
-#define RRA "\nrra"
-#define RRB "\nrrb"
-#define RRR "\nrrr"
+#define SA "sa\n"
+#define SB "sb\n"
+#define SS "ss\n"
+#define PA "pa\n"
+#define PB "pb\n"
+#define RA "ra\n"
+#define RB "rb\n"
+#define RR "rr\n"
+#define RRA "rra\n"
+#define RRB "rrb\n"
+#define RRR "rrr\n"
 
-#define UPA lsta = (*lsta)->prev
-#define UPB	lstb = (*lstb)->prev
-#define DOWNA lsta = (*lsta)->next
-#define DOWNB lstb = (*lstb)->next
+#define UPA *lsta = (*lsta)->prev
+#define UPB	*lstb = (*lstb)->prev
+#define DOWNA *lsta = (*lsta)->next
+#define DOWNB *lstb = (*lstb)->next
 
 typedef struct node
 {
@@ -55,20 +56,34 @@ typedef struct range
 	int	lowest;
 } t_range;
 
-
-/*big struct for the operations or macros*/
-
+// List functions
 t_list	*ft_lstnew(int content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-int	ft_atoi(const char *nptr);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstfirst(t_list *node);
 
-void	ft_lstclear(t_list **lst, void (*del)(void *));
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
+//  Utilitie functions
+int	ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *s);
-int check_input(int argc, char **argv);
 int	ft_isdigit(unsigned char c);
+void	output_inst(t_list **lsta, t_list **lstb, t_inst **instructions);
 
+// Instruction functions
+t_inst	*add_inst(char *set_inst);
+void	inst_add_back(t_inst **instlst, t_inst *new_inst);
+t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions);
+t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions);
+t_inst	**inst_ra(t_list **lsta, t_inst **instructions);
+t_inst	**inst_rb(t_list **lstb, t_inst **instructions);
+t_inst	**inst_rr(t_list **lsta, t_list **lstb, t_inst **instructions);
+t_inst	**inst_sa(t_list **lsta, t_inst **instructions);
+t_inst	**inst_sb(t_list **lstb, t_inst **instructions);
+t_inst	**inst_ss(t_list **lsta, t_list **lstb, t_inst **instructions);
+t_inst	**inst_rra(t_list **lsta, t_inst **instructions);
+t_inst	**inst_rrb(t_list **lstb, t_inst **instructions);
+t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions);
+
+// Main algorithms
+t_inst **sort_3( t_list **lsta, t_inst **instructions);
 
 #endif

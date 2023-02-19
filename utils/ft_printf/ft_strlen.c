@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 15:26:54 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/08 15:31:56 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/08 16:56:45 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/30 19:18:43 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-int	ft_isdigit(unsigned char c)
+size_t	ft_strlen(const char *s)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	unsigned int	lenght;
+
+	lenght = 0;
+	while (s[lenght])
+		lenght++;
+	return (lenght);
 }

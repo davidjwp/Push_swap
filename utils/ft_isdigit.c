@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 13:23:31 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 19:20:00 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/08 15:26:54 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/08 15:31:56 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	strncmp(const char *s1, const char *s2, size_t n)
+int	ft_isdigit(unsigned char c)
 {
-	if (!n)
-		return (0);
-	while (*s1 == *s2 && n - 1)
-	{
-		s1++;
-		s2++;
-		n--;
-	}
-	if ((*s1 - *s2) == -128)
+	if (c >= 48 && c <= 57)
 		return (1);
-	return (*s1 - *s2);
+	return (0);
 }

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_add_back.c                                    :+:      :+:    :+:   */
+/*   ft_prxmin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 18:17:28 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/18 18:17:30 by djacobs          ###   ########.fr       */
+/*   Created: 2022/12/08 13:28:16 by djacobs           #+#    #+#             */
+/*   Updated: 2022/12/19 20:32:44 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-void    inst_add_back(t_inst **instlst, t_inst *new_inst)
+unsigned int	ft_prxmin(va_list _valist)
 {
-	if (*instlst == NULL)
-		*instlst = new_inst;
-	else
-	{
-        while ((*instlst)->next != NULL)
-            *instlst = (*instlst)->next;
-		(*instlst)->next = new_inst;
-		(*instlst)->prev = ;
-	}
+	t_def	the_;
+
+	the_.sign_check = va_arg(_valist, unsigned int);
+	the_.upper = 0;
+	the_.type = 0;
+	the_.length = convert_to_hex_type(the_.sign_check, the_);
+	return (the_.length);
 }

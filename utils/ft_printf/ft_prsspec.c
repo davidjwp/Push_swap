@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_sort.c                                       :+:      :+:    :+:   */
+/*   ft_prsspec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 12:43:05 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/18 12:43:07 by djacobs          ###   ########.fr       */
+/*   Created: 2022/12/04 14:33:37 by djacobs           #+#    #+#             */
+/*   Updated: 2022/12/04 14:56:08 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"push_swap.h"
+#include "ft_printf.h"
 
-int	check_sort(t_list **lsta)
+int	ft_prsspec(va_list _valist)
 {
-	int	checker;
+	int		length;
+	char	*fstr;
 
-	while ((*lsta)->next != NULL)
+	fstr = va_arg(_valist, char *);
+	if (fstr == NULL)
 	{
-		checker = (*lsta)->value;
-		DOWNA;
-		if (checker > (*lsta)->value)
-			return (0);
+		write(1, "(null)", 6);
+		return (6);
 	}
-	ft_lstfirst(lsta);
-	return (1);
+	else
+	{
+		length = ft_strlen(fstr);
+		write (1, fstr, length);
+		return (length);
+	}
+	return (0);
 }

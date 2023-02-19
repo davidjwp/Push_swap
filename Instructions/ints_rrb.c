@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	inst_rrb(t_list **lsta)
+t_inst	**inst_rrb(t_list **lstb, t_inst **instructions)
 {
 	int swap1;
 	int swap2;
@@ -28,4 +28,8 @@ void	inst_rrb(t_list **lsta)
 		(*lstb)->value = swap2;
 		UPB;
 	}
+	inst_add_back(instructions , add_inst(RRB));
+	while ((*instructions)->prev != NULL)
+		*instructions = (*instructions)->prev;
+	return (instructions);
 }

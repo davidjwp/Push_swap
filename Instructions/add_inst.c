@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   add_inst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 18:23:59 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 14:07:50 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/18 17:01:54 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/18 17:01:56 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+t_inst	*add_inst(char *set_inst)
 {
-	char	*ptr;
-	size_t	ptr_size;
+	t_inst *inst_node;
 
-	ptr_size = (int)(nmemb * size);
-	if (size != 0 && nmemb != (size_t)ptr_size / size)
-		return (NULL);
-	ptr = malloc(nmemb * size);
-	if (!ptr)
-		return (NULL);
-	while (ptr_size--)
-		ptr[ptr_size] = 0;
-	return (ptr);
+	inst_node = malloc(sizeof(t_inst));
+	inst_node->set = set_inst;
+	inst_node->next = NULL;
+	inst_node->prev = NULL;
+	return(inst_node);
 }

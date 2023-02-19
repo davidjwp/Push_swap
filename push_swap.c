@@ -12,31 +12,76 @@
 
 #include "push_swap.h"
 
-//clear list from start
-/*
-void ft_lstclear_start(t_list **lst)
+int	ft_strcmp(char *str1, char *str2)
 {
-	while ((*lst)->next)
-	{
-		*lst = (*lst)->next;
-		free((*lst)->prev);
-	}
-	return(free(*lst), free(lst));
-}
-*/
+	int	index;
+	int	sum1;
+	int sum2;
 
-//clear list from end
-
-void ft_lstclear_end(t_list **lst)
-{
-	while ((*lst)->prev)
-	{
-		*lst = (*lst)->prev;
-		free((*lst)->next);
-	}
-	return(free(*lst), free(lst));
+	sum1 = 0;
+	sum2 = 0;
+	index = 0;
+	if (!str1 || !str2)
+		return (0);
+	while (str1[index])		
+		sum1 += (int)str1[index++];
+	index = 0;
+	while (str2[index])
+		sum2 += (int)str2[index++];
+	return (sum1 - sum2);
 }
 
+int check_doubles(char *str, char **list, int argc, int pos)
+{
+	int	index;
+
+	index = 1;
+	if (index == pos)
+		index++;
+	while (ft_strcmp(str, list[index]) && index != argc)
+	{
+		index++;
+		if (index == pos)
+			index++;
+	}
+	if (index == argc)
+		return(1);
+	return (0);
+}
+
+int	check_digit(char *str)
+{
+	int index;
+
+	index = 0;
+	if (!str)
+		return (0);
+	while (str[index] >= 48 && str[index] <= 57)
+	{
+		index++;
+		if (!str[index])
+			return (1);
+	}
+	return (0);
+}
+
+int check_input(int argc, char **argv)
+{
+	int index;
+
+	index = 1;
+	while (check_digit(argv[index]))
+		index++;
+	if (index == argc)
+		index = 1;
+	else
+		return (0);
+	while (index != argc && check_doubles(argv[index], argv, argc, index))
+		index++;
+	if (index == argc)
+		return (1);
+	return (0);
+}
 
 int main(int argc, char **argv)
 {
@@ -50,18 +95,18 @@ int main(int argc, char **argv)
 		return (write(2, "error", 5), 0);
 	while (++index < argc)
 		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index])));
-	if (argc < 4)
-		return(sort_3(lsta, lstb), 0);
-	/*else if (argc < 6)
+	if (argc <= 4)
+		return(output_inst(lsta, lstb, sort_3(lsta, instructions)), 0);
+	/*else if (argc <= 6)
 		return(sort_5(), 0);
-	else if (argc < 101)
+	else if (argc <= 101)
 		return (sort_100(), 0);
 	else 
 		return(sort_500(), 0);*/
-	//end main in 17 lines
 	
+	//end main in 18 lines
 	//start ouput list forward
-	i = argc;
+	/*i = argc;
 	while (--i)
 	{
 		printf("%d\n",(*lsta)->content);
@@ -71,20 +116,6 @@ int main(int argc, char **argv)
 			break;
 	}
 	ft_lstclear_end(lsta);
-	
-	//start output list backwards
-	/*
-	while ((*lsta)->next != NULL)
-		*lsta = (*lsta)->next;
-	while (--i)
-	{
-		printf("%d\n",(*lsta)->content);
-		if ((*lsta)->prev != NULL)
-			*lsta = (*lsta)->prev;
-		else
-			break;
-	}
-	ft_lstclear_start(lsta);
 	*/
 	return (0);
 }

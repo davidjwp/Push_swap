@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   inst_add_back.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:24:09 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 17:06:54 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/18 18:17:28 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/18 18:17:30 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(t_list *))
+void	inst_add_back(t_inst **instlst, t_inst *new_inst)
 {
-	t_list	*plst;
-
-	while (lst && *lst && del)
+	if (*instlst == NULL)
+		*instlst = new_inst;
+	else
 	{
-		plst = (*lst)->next;
-		ft_lstdelone(*lst, (*del));
-		*lst = plst;
+		while ((*instlst)->next != NULL)
+			*instlst = (*instlst)->next;
+		(*instlst)->next = new_inst;
+		new_inst->prev = *instlst;
 	}
 }

@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 13:36:06 by djacobs           #+#    #+#             */
-/*   Updated: 2022/11/30 12:34:08 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/14 18:23:59 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/30 14:07:50 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "ft_printf.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if (lst && del)
-	{
-		(del)(lst->content);
-		free(lst);
-	}
+	char	*ptr;
+	size_t	ptr_size;
+
+	ptr_size = (int)(nmemb * size);
+	if (size != 0 && nmemb != (size_t)ptr_size / size)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (!ptr)
+		return (NULL);
+	while (ptr_size--)
+		ptr[ptr_size] = 0;
+	return (ptr);
 }

@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	inst_pa(t_list **lsta, t_list **lstb, inst_list **instruction)
+t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	t_list *swap;
 
@@ -22,5 +22,8 @@ void	inst_pa(t_list **lsta, t_list **lstb, inst_list **instruction)
 	swap = *lsta;
 	UPA;
 	(*lsta)->next = swap;
-	inst_add_back(instruction , add_inst(instruction, PA));
+	inst_add_back(instructions , add_inst(PA));
+	while ((*instructions)->prev != NULL)
+		*instructions = (*instructions)->prev;
+	return (instructions);
 }

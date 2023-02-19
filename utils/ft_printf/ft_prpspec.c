@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_inst.c                                         :+:      :+:    :+:   */
+/*   ft_prpspec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 17:01:54 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/18 17:01:56 by djacobs          ###   ########.fr       */
+/*   Created: 2022/12/08 13:02:40 by djacobs           #+#    #+#             */
+/*   Updated: 2022/12/20 13:32:39 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-t_inst	*add_inst(char *set_inst)
+unsigned int	ft_prpspec(va_list _valist)
 {
-	t_inst *inst_node;
+	t_def	the_;
 
-	inst_node = malloc(sizeof(t_inst));
-	inst_node->set = set_inst;
-	inst_node->next = NULL;
-	inst_node->prev = NULL;
-	return(inst_node);
+	the_.sign_check = va_arg(_valist, long unsigned int);
+	the_.type = 1;
+	the_.upper = 0;
+	the_.length = convert_to_hex_type(the_.sign_check, the_);
+	return (the_.length);
 }

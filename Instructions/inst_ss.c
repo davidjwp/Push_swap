@@ -12,21 +12,7 @@
 
 #include "../push_swap.h"
 
-void	inst_ss(t_list **lsta, t_list **lstb)
-{
-	int swap1;
-	int	swap2;
-
-	swap1 = (*lsta)->value;
-	DOWNA;
-	swap2 = (*lsta)->value;
-	(*lsta)->value = swap1;
-	UPA;
-	(*lsta)->value = swap2;
-    inst_sb(lstb);
-}
-
-void	inst_sb(t_list **lstb)
+void	ft_inst_sb(t_list **lstb)
 {
 	int swap1;
 	int	swap2;
@@ -37,4 +23,22 @@ void	inst_sb(t_list **lstb)
 	(*lstb)->value = swap1;
 	UPB;
 	(*lstb)->value = swap2;
+}
+
+t_inst	**inst_ss(t_list **lsta, t_list **lstb, t_inst **instructions)
+{
+	int swap1;
+	int	swap2;
+
+	swap1 = (*lsta)->value;
+	DOWNA;
+	swap2 = (*lsta)->value;
+	(*lsta)->value = swap1;
+	UPA;
+	(*lsta)->value = swap2;
+    ft_inst_sb(lstb);
+	inst_add_back(instructions , add_inst(SS));
+	while ((*instructions)->prev != NULL)
+		*instructions = (*instructions)->prev;
+	return (instructions);
 }
