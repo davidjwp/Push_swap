@@ -15,7 +15,7 @@ NAME 		= exec
 
 PRINTF		= $(wildcard utils/ft_printf/*.c) utils/ft_printf/ft_printf.h
 
-SRCS		= $(PRINTF) $(wildcard Instructions/*.c) $(wildcard utils/*.c) push_swap.h output_inst.c sort_3.c
+SRCS		= $(PRINTF) $(wildcard Instructions/*.c) $(wildcard utils/*.c) push_swap.h output_insts.c sort_3.c
 
 CC		= gcc
 CFLAGS		= #-Wall -Wextra -Werror

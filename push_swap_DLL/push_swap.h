@@ -48,7 +48,6 @@ typedef struct inst_list
 typedef struct range
 {
 	int	highest;
-	int mid;
 	int	lowest;
 } t_range;
 

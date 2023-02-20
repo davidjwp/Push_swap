@@ -41,30 +41,64 @@ t_range	get_range(t_range range, t_list **lsta)
 	*lsta = ft_lstfirst(lsta);
 	return (range);
 }
-
-t_inst	**sort_5(t_list **lsta, t_list **lstb, t_isnt **instructions)
+void	sort_lsta(t_list **lsta, t_inst **insts)
 {
-	t_range range;
+	t_range	range;
 
-	*instructions = NULL;
+	*insts = NULL;
 	range = get_range(range, lsta);
 	if (!check_sort(lsta))
 	{
 		if ((*lsta)->value == range.highest)
 		{
-			DOWNA;
+			*lsta = (*lsta)->next;
 			if ((*lsta)->value == range.lowest)
-				return(UPA,inst_ra(lsta, instructions));
+				return (inst_ra(lsta, insts, 1));
 			else
-				return(UPA, inst_sa(lsta, instructions), inst_rra(lsta, instructions));
+				return (inst_sa(lsta, insts, 1), inst_rra(lsta, insts, 1));
 		}
 		else if ((*lsta)->value == range.lowest)
-			return(inst_sa(lsta, instructions), inst_ra(lsta, instructions));
-		DOWNA;
+			return (inst_sa(lsta, insts, 1), inst_ra(lsta, insts, 1));
+		*lsta = (*lsta)->next;
 		if ((*lsta)->value == range.highest)
-			return(UPA, inst_rra(lsta, instructions));
+			return (inst_rra(lsta, insts, 1));
 		else
-			return(UPA, inst_sa(lsta, instructions));
+			return (inst_sa(lsta, insts, 1));
 	}
-	return(instructions);
+	return (insts);
+}
+
+t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **insts, int num)
+{
+	t_range range;
+
+	*insts = NULL;
+	if (!check_sort(lsta))
+	{
+		inst_pb(lsta, lstb, insts, num - 3);
+		sort_lsta(lsta, insts);
+		inst_pa(lsta, lstb, insts, 1);
+		while (!check_sort(lsta))
+		{
+			range = get_range(range, lsta);
+			if ((*lsta)->value == range.highest)
+				inst_ra(lsta, insts, 1);
+			else if ((*lsta)->value == range.lowest)
+				inst_pa(lsta, lstb, insts, 1);
+			else
+			{
+				range.mid = (*lsta)->value;
+				*lsta = (*lsta)->next;
+				if (range.mid > (*lsta)->value)
+				{
+					inst_
+				}
+			}
+			/**lsta = (*lsta)->next;
+			if ((*lsta)->value == range.highest)
+
+			else if ((*lsta)->value == range.lowest)*/
+		}
+	}
+	return(insts);
 }

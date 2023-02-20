@@ -10,13 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*a better faster and easier to use and understand version of this would be not to use doubly linked lists but arrays of integers, 
-list a and list b declared and allocated with the number of arguments given, you check for errors just the same then list a is iterated 
-on while giving the proper number to the proper spot, to add a number just give it to the other array and replace the original 
-with NULL, same thing to remove, to rotate or reverse rotate is the same as the lists, you can still save the position in a separate
-variable, remember the point of the exercise is to get the right output not to recreate the list, this way would reduce the length of 
-the code and make it cleaner, you could also have a way to keep track of the position of each element*/
-
 #include "push_swap.h"
 
 int	ft_strcmp(char *str1, char *str2)
@@ -63,7 +56,7 @@ int	check_digit(char *str)
 	index = 0;
 	if (!str)
 		return (0);
-	if (str[index] == 45)
+	if (strp[index] == 45)
 		index++;
 	while (str[index] >= 48 && str[index] <= 57)
 	{
@@ -91,8 +84,11 @@ int check_input(int argc, char **argv)
 		return (1);
 	return (0);
 }
-
-int main(int argc, char **argv)
+/*a better faster and easier to use and understand version of this would be not to use doubly linked lists but arrays of integers, 
+list a and list b declared and allocated with the number of arguments given, you check for errors then list a is iterated 
+on while giving the proper number to the proper spot in lista, to add a number just give it to the other array and replace the original 
+with NULL, same thing to remove, to rotate or reverse rotate is the same as the lists*/
+int main(int argc, char **argv)//19 lines
 {
 	int	index;
 

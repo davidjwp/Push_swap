@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output_inst.c                                      :+:      :+:    :+:   */
+/*   output_insts.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/19 10:15:58 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/19 10:16:00 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/20 16:07:29 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/20 16:07:42 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void ft_lstclear(t_list **lst)
+void	ft_lstclear(t_list **lst)
 {
 	while ((*lst)->next != NULL)
 	{
 		*lst = (*lst)->next;
 		free((*lst)->prev);
 	}
-	return(free(*lst), free(lst));
+	return (free(*lst), free(lst));
 }
 
-void ft_instclear(t_inst **instructions)
+void	ft_instclear(t_inst **instructions)
 {
 	while ((*instructions)->next != NULL)
 	{
 		*instructions = (*instructions)->next;
 		free((*instructions)->prev);
 	}
-	return(free(*instructions), free(instructions));
+	return (free(*instructions), free(instructions));
 }
 
 void	free_all(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
+	ft_lstfirst();
 	ft_lstclear(lsta);
 	free(lstb);
 	if (*instructions == NULL)
@@ -46,9 +47,8 @@ void	free_all(t_list **lsta, t_list **lstb, t_inst **instructions)
 	ft_instclear(instructions);
 }
 
-void	output_inst(t_list **lsta, t_list **lstb, t_inst **instructions)
+void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
-	
 	if (*instructions == NULL)
 		return (free_all(lsta, lstb, instructions));
 	if ((*instructions)->prev == NULL)
