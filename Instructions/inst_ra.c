@@ -27,7 +27,7 @@ t_inst	**inst_ra(t_list **lsta, t_inst **instructions)
 		(*lsta)->value = swap2;
 		DOWNA;
 	}
-	ft_lstfirst(*lsta);
+	ft_lstfirst(lsta);
 	inst_add_back(instructions , add_inst(RA));
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;

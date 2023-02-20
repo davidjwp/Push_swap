@@ -21,9 +21,9 @@ int	check_sort(t_list **lsta)
 		checker = (*lsta)->value;
 		DOWNA;
 		if (checker > (*lsta)->value)
-			return(*lsta = ft_lstfirst(*lsta), 0);
+			return(*lsta = ft_lstfirst(lsta), 0);
 	}
-	*lsta = ft_lstfirst(*lsta);
+	*lsta = ft_lstfirst(lsta);
 	return (1);
 }
 
@@ -39,15 +39,15 @@ t_range	get_range(t_range range, t_list **lsta)
 		else if ((*lsta)->value < range.lowest)
 			range.lowest = (*lsta)->value;
 	}
-	*lsta = ft_lstfirst(*lsta);
+	*lsta = ft_lstfirst(lsta);
 	return (range);
 }
-//if the list is ordered then it returns instructions with nothing in it / you should also review the instructions as you might have
-//changed rra already, maybe not idk
+
 t_inst **sort_3( t_list **lsta, t_inst **instructions)
 {
 	t_range range;
-	
+
+	*instructions = NULL;
 	range = get_range(range, lsta);
 	if (!check_sort(lsta))
 	{
@@ -60,7 +60,7 @@ t_inst **sort_3( t_list **lsta, t_inst **instructions)
 				return(UPA, inst_sa(lsta, instructions), inst_rra(lsta, instructions));
 		}
 		else if ((*lsta)->value == range.lowest)
-			return(UPA, inst_sa(lsta, instructions), inst_ra(lsta, instructions));
+			return(inst_sa(lsta, instructions), inst_ra(lsta, instructions));
 		DOWNA;
 		if ((*lsta)->value == range.highest)
 			return(UPA, inst_rra(lsta, instructions));

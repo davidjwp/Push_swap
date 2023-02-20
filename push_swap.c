@@ -83,13 +83,15 @@ int check_input(int argc, char **argv)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv)//19 lines
 {
 	int	index;
 
 	t_list	**lsta = malloc(sizeof(t_list));
 	t_list	**lstb = malloc(sizeof(t_list));
 	t_inst	**instructions = malloc(sizeof(t_inst));
+	*lsta = NULL;
+	*lstb = NULL;
 	index = 0;
 	if (argc < 2 || !check_input(argc, argv))
 		return (write(2, "error", 5), 0);
@@ -97,14 +99,14 @@ int main(int argc, char **argv)
 		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index])));
 	if (argc <= 4)
 		return(output_inst(lsta, lstb, sort_3(lsta, instructions)), 0);
-	/*else if (argc <= 6)
+	else if (argc <= 6)
 		return(sort_5(), 0);
 	else if (argc <= 101)
 		return (sort_100(), 0);
 	else 
 		return(sort_500(), 0);*/
-	
-	//end main in 18 lines
+	//end main 
+
 	//start ouput list forward
 	/*i = argc;
 	while (--i)

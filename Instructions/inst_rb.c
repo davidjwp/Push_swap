@@ -27,7 +27,7 @@ t_inst	**inst_rb(t_list **lstb, t_inst **instructions)
 		(*lstb)->value = swap2;
 		DOWNB;
 	}
-	ft_lstfirst(*lstb);
+	ft_lstfirst(lstb);
 	inst_add_back(instructions , add_inst(RB));
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;

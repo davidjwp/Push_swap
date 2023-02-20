@@ -16,7 +16,7 @@ t_inst	**inst_sa(t_list **lsta, t_inst **instructions)
 {
 	int swap1;
 	int	swap2;
-	//segfault right here with 1 3 2 for some reason 
+
 	swap1 = (*lsta)->value;
 	DOWNA;
 	swap2 = (*lsta)->value;

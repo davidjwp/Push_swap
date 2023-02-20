@@ -20,8 +20,9 @@ void	ft_lstadd_back(t_list **list, t_list *new)
 		*list = new;
 	else
 	{
-		node = ft_lstlast(*list);
+		node = ft_lstlast(list);
 		node->next = new;
 		new->prev = node;
 	}
+	*list = ft_lstfirst(list);
 }

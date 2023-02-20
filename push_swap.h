@@ -59,8 +59,8 @@ typedef struct range
 // List functions
 t_list	*ft_lstnew(int content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstfirst(t_list *node);
+t_list	*ft_lstlast(t_list **lst);
+t_list	*ft_lstfirst(t_list **lst);
 
 //  Utilitie functions
 int	ft_atoi(const char *nptr);
@@ -84,6 +84,7 @@ t_inst	**inst_rrb(t_list **lstb, t_inst **instructions);
 t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions);
 
 // Main algorithms
-t_inst **sort_3( t_list **lsta, t_inst **instructions);
+t_inst	**sort_3( t_list **lsta, t_inst **instructions);
+t_inst	**sort_5(t_list **lsta, t_list **lstb, t_isnt **instructions);
 
 #endif

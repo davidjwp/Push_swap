@@ -14,10 +14,10 @@
 
 void ft_lstclear(t_list **lst)
 {
-	while ((*lst)->prev != NULL)
+	while ((*lst)->next != NULL)
 	{
-		*lst = (*lst)->prev;
-		free((*lst)->next);
+		*lst = (*lst)->next;
+		free((*lst)->prev);
 	}
 	return(free(*lst), free(lst));
 }
@@ -32,8 +32,25 @@ void ft_instclear(t_inst **instructions)
 	return(free(*instructions), free(instructions));
 }
 
+void	free_all(t_list **lsta, t_list **lstb, t_inst **instructions)
+{
+	ft_lstclear(lsta);
+	free(lstb);
+	if (*instructions == NULL)
+		return (free(instructions));
+	else
+	{
+		while ((*instructions)->prev != NULL)
+			*instructions = (*instructions)->prev;
+	}
+	ft_instclear(instructions);
+}
+
 void	output_inst(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
+	
+	if (*instructions == NULL)
+		return (free_all(lsta, lstb, instructions));
 	if ((*instructions)->prev == NULL)
 	{
 		ft_printf("%s", (*instructions)->set);
@@ -43,12 +60,5 @@ void	output_inst(t_list **lsta, t_list **lstb, t_inst **instructions)
 			ft_printf("%s", (*instructions)->set);
 		}
 	}
-	ft_lstclear(lsta);
-	if(*lstb)
-		ft_lstclear(lstb);
-	else
-		free(lstb);
-	while ((*instructions)->prev != NULL)
-		*instructions = (*instructions)->prev;
-	ft_instclear(instructions);
+	free_all(lsta, lstb, instructions);
 }

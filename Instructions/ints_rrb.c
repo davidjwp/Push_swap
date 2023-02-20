@@ -17,7 +17,7 @@ t_inst	**inst_rrb(t_list **lstb, t_inst **instructions)
 	int swap1;
 	int swap2;
 
-	ft_lstlast(*lstb);
+	ft_lstlast(lstb);
 	while ((*lstb)->prev != NULL)
 	{
 		swap1 = (*lstb)->value;
