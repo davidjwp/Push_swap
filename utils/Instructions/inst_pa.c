@@ -10,19 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
+
+
+t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
+{
+	t_list	*swap;
+		//checker
+	char *set;
+
+	(*lsta)->prev = *lstb;
+	swap = *lsta;
+	*lsta = (*lsta)->prev;
+	(*lsta)->next = swap;
+	*lstb = NULL;
+	inst_add_back(instructions, add_inst(PA));
+	while ((*instructions)->prev != NULL)
+		*instructions = (*instructions)->prev;
+	set = (*instructions)->set;
+	return (instructions);
+}
 
 t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 {
 	t_list	*swap;
 
+	if ((*lstb)->next == NULL)
+	{
+		last_lstb(lsta, lstb, instructions);
+		num--;
+	}
 	while (num--)
 	{
 		(*lsta)->prev = *lstb;
 		*lstb = (*lstb)->next;
-		(*lstb)->prev = NULL;
 		swap = *lsta;
 		*lsta = (*lsta)->prev;
+		(*lstb)->prev = NULL;
 		(*lsta)->next = swap;
 		inst_add_back(instructions, add_inst(PA));
 		while ((*instructions)->prev != NULL)

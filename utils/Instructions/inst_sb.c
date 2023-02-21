@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ints_rra.c                                         :+:      :+:    :+:   */
+/*   inst_sb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:36:17 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 18:36:19 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/15 17:20:27 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/15 17:20:29 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
 
-t_inst	**inst_rra(t_list **lsta, t_inst **instructions, int num)
+t_inst	**inst_sb(t_list **lstb, t_inst **instructions, int num)
 {
 	int	swap1;
 	int	swap2;
 
-	*lsta = ft_lstlast(lsta);
+	*lstb = ft_lstfirst(lstb);
 	while (num--)
 	{
-		ft_lstlast(lsta);
-		while ((*lsta)->prev != NULL)
-		{
-			swap1 = (*lsta)->value;
-			*lsta = (*lsta)->prev;
-			swap2 = (*lsta)->value;
-			(*lsta)->value = swap1;
-			*lsta = (*lsta)->next;
-			(*lsta)->value = swap2;
-			*lsta = (*lsta)->prev;
-		}
-		inst_add_back(instructions, add_inst(RRA));
+		swap1 = (*lstb)->value;
+		*lstb = (*lstb)->next;
+		swap2 = (*lstb)->value;
+		(*lstb)->value = swap1;
+		*lstb = (*lstb)->prev;
+		(*lstb)->value = swap2;
+		inst_add_back(instructions, add_inst(SB));
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}

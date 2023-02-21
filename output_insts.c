@@ -34,7 +34,7 @@ void	ft_instclear(t_inst **instructions)
 
 void	free_all(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
-	ft_lstfirst();
+	*lsta = ft_lstfirst(lsta);
 	ft_lstclear(lsta);
 	free(lstb);
 	if (*instructions == NULL)

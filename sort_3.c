@@ -12,37 +12,6 @@
 
 #include "push_swap.h"
 
-int	check_sort(t_list **lsta)
-{
-	int	checker;
-
-	while ((*lsta)->next != NULL)
-	{
-		checker = (*lsta)->value;
-		*lsta = (*lsta)->next;
-		if (checker > (*lsta)->value)
-			return (*lsta = ft_lstfirst(lsta), 0);
-	}
-	*lsta = ft_lstfirst(lsta);
-	return (1);
-}
-
-t_range	get_range(t_range range, t_list **lsta)
-{
-	range.highest = (*lsta)->value;
-	range.lowest = (*lsta)->value;
-	while ((*lsta)->next != NULL)
-	{
-		*lsta = (*lsta)->next;
-		if ((*lsta)->value > range.highest)
-			range.highest = (*lsta)->value;
-		else if ((*lsta)->value < range.lowest)
-			range.lowest = (*lsta)->value;
-	}
-	*lsta = ft_lstfirst(lsta);
-	return (range);
-}
-
 t_inst	**sort_3( t_list **lsta, t_inst **insts)
 {
 	t_range	range;

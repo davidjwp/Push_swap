@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_pb.c                                          :+:      :+:    :+:   */
+/*   check_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:10:37 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 18:10:38 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/21 10:29:19 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/21 10:29:21 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
+int	check_sort(t_list **lsta)
 {
-	t_list	*swap;
+	int	checker;
 
-	while (num--)
+	while ((*lsta)->next != NULL)
 	{
-		(*lstb)->prev = *lsta;
+		checker = (*lsta)->value;
 		*lsta = (*lsta)->next;
-		(*lsta)->prev = NULL;
-		swap = *lstb;
-		*lstb = (*lstb)->prev;
-		(*lstb)->next = swap;
-		inst_add_back(instructions, add_inst(PB));
-		while ((*instructions)->prev != NULL)
-			*instructions = (*instructions)->prev;
+		if (checker > (*lsta)->value)
+			return (*lsta = ft_lstfirst(lsta), 0);
 	}
-	return (instructions);
+	*lsta = ft_lstfirst(lsta);
+	return (1);
 }

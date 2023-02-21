@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ints_rrb.c                                         :+:      :+:    :+:   */
+/*   inst_ra.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 18:36:27 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 18:36:28 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/15 17:27:12 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/15 17:27:15 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
 
-t_inst	**inst_rrb(t_list **lstb, t_inst **instructions, int num)
+t_inst	**inst_ra(t_list **lsta, t_inst **instructions, int num)
 {
 	int	swap1;
 	int	swap2;
 
-	*lstb = ft_lstlast(lstb);
+	*lsta = ft_lstfirst(lsta);
 	while (num--)
 	{
-		ft_lstlast(lstb);
-		while ((*lstb)->prev != NULL)
+		while ((*lsta)->next != NULL)
 		{
-			swap1 = (*lstb)->value;
-			*lstb = (*lstb)->prev;
-			swap2 = (*lstb)->value;
-			(*lstb)->value = swap1;
-			*lstb = (*lstb)->next;
-			(*lstb)->value = swap2;
-			*lstb = (*lstb)->prev;
+			swap1 = (*lsta)->value;
+			*lsta = (*lsta)->next;
+			swap2 = (*lsta)->value;
+			(*lsta)->value = swap1;
+			*lsta = (*lsta)->prev;
+			(*lsta)->value = swap2;
+			*lsta = (*lsta)->next;
 		}
-		inst_add_back(instructions, add_inst(RRB));
+		ft_lstfirst(lsta);
+		inst_add_back(instructions, add_inst(RA));
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}

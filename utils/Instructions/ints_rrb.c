@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_rb.c                                          :+:      :+:    :+:   */
+/*   ints_rrb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 17:42:31 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 17:42:33 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/15 18:36:27 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/15 18:36:28 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
 
-t_inst	**inst_rb(t_list **lstb, t_inst **instructions, int num)
+t_inst	**inst_rrb(t_list **lstb, t_inst **instructions, int num)
 {
 	int	swap1;
 	int	swap2;
 
-	*lstb = ft_lstfirst(lstb);
+	*lstb = ft_lstlast(lstb);
 	while (num--)
 	{
-		while ((*lstb)->next != NULL)
+		ft_lstlast(lstb);
+		while ((*lstb)->prev != NULL)
 		{
 			swap1 = (*lstb)->value;
-			*lstb = (*lstb)->next;
+			*lstb = (*lstb)->prev;
 			swap2 = (*lstb)->value;
 			(*lstb)->value = swap1;
-			*lstb = (*lstb)->prev;
-			(*lstb)->value = swap2;
 			*lstb = (*lstb)->next;
+			(*lstb)->value = swap2;
+			*lstb = (*lstb)->prev;
 		}
-		ft_lstfirst(lstb);
-		inst_add_back(instructions, add_inst(RB));
+		inst_add_back(instructions, add_inst(RRB));
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}

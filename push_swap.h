@@ -61,8 +61,11 @@ t_list	*ft_lstfirst(t_list **lst);
 //  Utilitie functions
 int	ft_atoi(const char *nptr);
 size_t	ft_strlen(const char *s);
+int	ft_strcmp(char *str1, char *str2);
 int	ft_isdigit(unsigned char c);
 void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions);
+int	check_sort(t_list **lsta);
+t_range	get_range(t_range range, t_list **lsta);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);
