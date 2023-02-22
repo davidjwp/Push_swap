@@ -13,7 +13,7 @@
 
 #include "../../push_swap.h"
 
-int	str_cmp(char *str, int num1, int num2)//does not handle negatives but works 
+int	str_cmp(char *str, int num1, int num2)
 {
 	int	sum1;
 	int	sum2;
@@ -22,16 +22,16 @@ int	str_cmp(char *str, int num1, int num2)//does not handle negatives but works
 	sum2 = 0;
 	while (str[num1])
 	{
-		while (str[num1] < 48 || str[num1] > 57)
+		while ((str[num1] < 48 || str[num1] > 57) && str[num1] != 45)
 			num1++;
-		while (str[num1] >= 48 && str[num1] <= 57)
+		while (str[num1] >= 48 && str[num1] <= 57 || str[num1] == 45)
 			sum1 += str[num1++];
 		num2 = num1;
 		while (str[num2])
 		{
-			while (str[num2] < 48 || str[num2] > 57)
+			while ((str[num2] < 48 || str[num2] > 57) && str[num2] != 45)
 				num2++;
-			while (str[num2] >= 48 && str[num2] <= 57)
+			while (str[num2] >= 48 && str[num2] <= 57 || str[num2] == 45)
 				sum2 += str[num2++];
 			if ((sum1 - sum2) == 0)
 				return (0);
@@ -83,13 +83,13 @@ void	str_to_lst(t_list **lsta, char *str)
 	while (num2 < num1)
 	{
 		new = malloc(sizeof(char *));
-		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(get_str(str, new, num2))));
+		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(get_str(str, new, num2))));//this is where the problem is, it only takes the number not the negative part
 		num2++;
 		free(new);
 	}
 }
 
-int	parsing_check(t_list **lsta, int argc, char **argv)
+int	parsing_check(t_list **lsta, int argc, char **argv)//there are still problems with parsing a string and negative numbers
 {
 	int	index;
 

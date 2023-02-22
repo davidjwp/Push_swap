@@ -68,7 +68,9 @@ int	check_sa(t_list **lsta, t_inst **insts, t_range range)
 	if ((*lsta)->value == range.lowest)
 	{
 		if (check_sort(lsta))
-			return (ft_lstfirst(lsta), inst_sa(lsta, insts, 1), 1);
+			return (ft_lstfirst(lsta), inst_sa(lsta, insts, 1), 0);
+		if ((*lsta)->value == range.highest)
+			return(inst_ra(lsta, insts, 1), 0);
 	}
 	return (0);
 }
@@ -79,9 +81,8 @@ t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 
 	*insts = NULL;
 	range = get_range(range, lsta);
-	if (check_sa(lsta, insts, range))
-		return (insts);
-	else if (!check_sort(lsta))
+	check_sa(lsta, insts, range);
+	if (!check_sort(lsta))
 	{
 		inst_pb(lsta, lstb, insts, num - 3);
 		sort_lsta(lsta, insts, range);

@@ -44,6 +44,7 @@ int main(int argc, char **argv)
 	t_list	**lstb;
 	t_inst	**insts;
 	int	count;
+	int	value;
 
 	lsta = malloc(sizeof(t_list));
 	lstb = malloc(sizeof(t_list));
@@ -52,6 +53,12 @@ int main(int argc, char **argv)
 	*lstb = NULL;
 	if (!parsing_check(lsta, argc, argv))
 		return (free(lsta), free(lstb), free(insts), write(2, "error", 5), 0);
+	while ((*lsta)->next != NULL)
+	{
+		value = (*lsta)->value;
+		*lsta = (*lsta)->next;
+	}
+	value = (*lsta)->value;
 	count = count_list(lsta);
 	if (count <= 3)
 		return (output_insts(lsta, lstb, sort_3(lsta, insts)), 0);
