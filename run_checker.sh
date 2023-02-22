@@ -1,3 +1,3 @@
-ARG="1 5 4 2 3"
+ARG="5 3 1 2 4"
 
 ./exec $ARG | ./checker_linux $ARG

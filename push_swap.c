@@ -19,27 +19,48 @@ the code and make it cleaner, you could also have a way to keep track of the pos
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)//21
+int count_list(t_list **lsta)
 {
-	int	index;
+	int num;
 
-	t_list	**lsta = malloc(sizeof(t_list));
-	t_list	**lstb = malloc(sizeof(t_list));
-	t_inst	**insts = malloc(sizeof(t_inst));
+	num = 0;
+	while (num < 100)
+	{
+		num++;
+		if ((*lsta)->next == NULL)
+		{
+			*lsta = ft_lstfirst(lsta);
+			return (num);
+		}
+		*lsta = (*lsta)->next;
+	}
+	*lsta = ft_lstfirst(lsta);
+	return (num);
+}
+
+int main(int argc, char **argv)
+{
+	t_list	**lsta;
+	t_list	**lstb;
+	t_inst	**insts;
+	int	count;
+
+	lsta = malloc(sizeof(t_list));
+	lstb = malloc(sizeof(t_list));
+	insts = malloc(sizeof(t_inst));
 	*lsta = NULL;
 	*lstb = NULL;
-	index = 0;
-	if (argc < 2 || !parsing_check(lsta, lstb, ))
+	if (!parsing_check(lsta, argc, argv))
 		return (free(lsta), free(lstb), free(insts), write(2, "error", 5), 0);
-	//while (++index < argc)
-//		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index])));
-	if (argc <= 4)
-		return (output_insts(lsta, lstb, sort_3(lsta, instructions)), 0);
-	else if (argc <= 6)
-		return (output_insts(lsta, lstb, sort_5(lsta, lstb, instructions, --argc)), 0);
-	//else if (argc <= 101)
-	//	return (output_insts(lsta, lstb, sort_100(lsta, lstb, instructions)), 0));
+	count = count_list(lsta);
+	if (count <= 3)
+		return (output_insts(lsta, lstb, sort_3(lsta, insts)), 0);
+	else if (count <= 5)
+		return (output_insts(lsta, lstb, sort_5(lsta, lstb, insts, count)), 0);
+	//else if (count <= 100)
+	//	return (output_insts(lsta, lstb, sort_100(lsta, lstb, insts)), 0));
 	//else 
-	//	return (output_insts(lsta, lstb, sort_500(lsta, lstb, instructions)), 0));*/
+	//	return (output_insts(lsta, lstb, sort_500(lsta, lstb, insts)), 0));*/
+	return (0);
 	//end main 
 }

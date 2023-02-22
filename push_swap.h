@@ -66,6 +66,9 @@ int	ft_isdigit(unsigned char c);
 void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions);
 int	check_sort(t_list **lsta);
 t_range	get_range(t_range range, t_list **lsta);
+char	*get_str(char *str, char *new, int num);
+int	check_args(int argc, char **argv);
+int	parsing_check(t_list **lsta, int argc, char **argv);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);

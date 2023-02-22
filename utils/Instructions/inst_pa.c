@@ -16,8 +16,6 @@
 t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	t_list	*swap;
-		//checker
-	char *set;
 
 	(*lsta)->prev = *lstb;
 	swap = *lsta;
@@ -27,7 +25,6 @@ t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 	inst_add_back(instructions, add_inst(PA));
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;
-	set = (*instructions)->set;
 	return (instructions);
 }
 

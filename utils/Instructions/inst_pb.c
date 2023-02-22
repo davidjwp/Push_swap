@@ -28,7 +28,7 @@ t_inst	**no_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 {
 	t_list	*swap;
-
+	int	value;
 	if (!*lstb)
 	{
 		no_lstb(lsta, lstb, instructions);

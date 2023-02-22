@@ -14,6 +14,9 @@
 
 t_range	get_range(t_range range, t_list **lsta)
 {
+	int	value;
+
+	value = (*lsta)->value;
 	range.highest = (*lsta)->value;
 	range.lowest = (*lsta)->value;
 	while ((*lsta)->next != NULL)

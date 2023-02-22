@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap"
+#include "../push_swap.h"
 
 int	ft_strcmp(char *str1, char *str2)
 {
