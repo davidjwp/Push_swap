@@ -35,6 +35,7 @@ typedef struct node
 {
 	struct node *prev;
 	int			value;
+	int			position;
 	struct node	*next;
 }			t_list;
 
@@ -53,7 +54,7 @@ typedef struct range
 } t_range;
 
 // List functions
-t_list	*ft_lstnew(int content);
+t_list	*ft_lstnew(int content, int position);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list **lst);
 t_list	*ft_lstfirst(t_list **lst);
@@ -73,6 +74,7 @@ int	parsing_check(t_list **lsta, int argc, char **argv);
 // Instruction functions
 t_inst	*add_inst(char *set_inst);
 void	inst_add_back(t_inst **instlst, t_inst *new_inst);
+void	pos_reset(t_list **lsta);
 t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 t_inst	**inst_ra(t_list **lsta, t_inst **instructions, int num);
@@ -88,5 +90,6 @@ t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 // Main algorithms
 t_inst	**sort_3( t_list **lsta, t_inst **instructions);
 t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
+t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
 
 #endif

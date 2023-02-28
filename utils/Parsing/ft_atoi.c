@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 10:49:31 by djacobs           #+#    #+#             */
-/*   Updated: 2022/12/02 10:49:36 by djacobs          ###   ########.fr       */
+/*   Created: 2022/11/14 17:42:28 by djacobs           #+#    #+#             */
+/*   Updated: 2022/11/30 18:42:52 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
 
-void	ft_lstadd_back(t_list **list, t_list *new)
+int	ft_atoi(const char *nptr)
 {
-	if (*list == NULL)
-		*list = new;
-	else
+	int	result;
+	int	negative;	
+
+	result = 0;
+	negative = 1;
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '-')
 	{
-		*list = ft_lstlast(list);
-		(*list)->next = new;
-		new->prev = *list;
+		nptr++;
+		negative = -1;
 	}
-	*list = ft_lstfirst(list);
+	else if (*nptr == '+')
+		nptr++;
+	while (ft_isdigit(*nptr))
+	{
+		result *= 10;
+		result += *nptr - 48;
+		nptr++;
+	}
+	result *= negative;
+	return (result);
 }

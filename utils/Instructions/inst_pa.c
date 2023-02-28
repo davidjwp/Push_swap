@@ -12,6 +12,16 @@
 
 #include "../../push_swap.h"
 
+void	pos_plus(t_list **lsta)
+{
+	while ((*lsta)->next != NULL)
+	{
+		(*lsta)->position++;
+		*lsta = (*lsta)->next;
+	}
+	(*lsta)->position++;
+	ft_lstfirst(lsta);
+}
 
 t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
@@ -21,8 +31,7 @@ t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 	swap = *lsta;
 	*lsta = (*lsta)->prev;
 	(*lsta)->next = swap;
-	*lstb = NULL;
-	inst_add_back(instructions, add_inst(PA));
+	*lstb = NULL; 
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;
 	return (instructions);
@@ -49,5 +58,7 @@ t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}
+	pos_plus(lsta);
+	(*lsta)->position = 0;
 	return (instructions);
 }

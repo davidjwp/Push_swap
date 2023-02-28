@@ -12,26 +12,31 @@
 
 #include "../../push_swap.h"
 
-char	*get_str(char *str, char *new, int num)
+int	is_neg(char *str)
 {
-	int index;
+	if (*str == 45 && (str[1] >= 48 && str[1] <= 57))
+		return (1);
+	return (0);
+}
+
+char	*get_str(char *str, char *new, int num)//19
+{
 	int	pos;
 
 	pos = 0;
-	index = 0;
-	while (str[index])
+	while (*str)
 	{
-		while (str[index] <= 48 || str[index] >= 57)
-			index++;
+		while ((*str <= 48 && *str != 45) || *str >= 57)
+			str++;
 		if (!num)
 			break;
-		if (str[index] >= 48 && str[index] <= 57)
+		if ((*str >= 48 && *str <= 57) || is_neg(str))
 			num--;
-		while (str[index] >= 48 && str[index] <= 57)
-			index++;
+		while ((*str >= 48 && *str <= 57) || is_neg(str))
+			str++;
 	}
-	while (str[index] >= 48 && str[index] <= 57 || str[index] == 45)
-		new[pos++] = str[index++];
+	while (*str >= 48 && *str <= 57 || *str == 45)
+		new[pos++] = *str++;
 	new[pos] = 0;
 	return (new);
 }

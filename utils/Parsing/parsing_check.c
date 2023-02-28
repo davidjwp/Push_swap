@@ -83,13 +83,13 @@ void	str_to_lst(t_list **lsta, char *str)
 	while (num2 < num1)
 	{
 		new = malloc(sizeof(char *));
-		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(get_str(str, new, num2))));//this is where the problem is, it only takes the number not the negative part
+		ft_lstadd_back(lsta, ft_lstnew(ft_atoi(get_str(str, new, num2)), num2));
 		num2++;
 		free(new);
 	}
 }
 
-int	parsing_check(t_list **lsta, int argc, char **argv)//there are still problems with parsing a string and negative numbers
+int	parsing_check(t_list **lsta, int argc, char **argv)
 {
 	int	index;
 
@@ -104,7 +104,7 @@ int	parsing_check(t_list **lsta, int argc, char **argv)//there are still problem
 	else if (check_args(argc, argv))
 	{
 			while (++index < argc)
-				ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index])));
+				ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index]), index));
 			return (1);
 	}
 	return (0);

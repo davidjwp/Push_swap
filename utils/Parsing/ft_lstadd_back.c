@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_inst.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 17:01:54 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/18 17:01:56 by djacobs          ###   ########.fr       */
+/*   Created: 2022/12/02 10:49:31 by djacobs           #+#    #+#             */
+/*   Updated: 2022/12/02 10:49:36 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../../push_swap.h"
 
-t_inst	*add_inst(char *set_inst)
+void	ft_lstadd_back(t_list **list, t_list *new)
 {
-	t_inst	*inst_node;
-
-	inst_node = malloc(sizeof(t_inst));
-	inst_node->set = set_inst;
-	inst_node->next = NULL;
-	inst_node->prev = NULL;
-	return (inst_node);
+	if (*list == NULL)
+		*list = new;
+	else
+	{
+		*list = ft_lstlast(list);
+		(*list)->next = new;
+		new->prev = *list;
+	}
+	*list = ft_lstfirst(list);
 }

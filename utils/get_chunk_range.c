@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inst_pa.c                                          :+:      :+:    :+:   */
+/*   get_chunk_range.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 17:45:29 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/15 17:45:31 by djacobs          ###   ########.fr       */
+/*   Created: 2023/02/28 17:01:52 by djacobs           #+#    #+#             */
+/*   Updated: 2023/02/28 17:01:53 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
+void	get_chunk_range(t_list **lsta, t_range range, int chunk , int num)
 {
-	t_list	*swap;
+	int	index;
 
-	while (num--)
-	{
-		(*lsta)->prev = *lstb;
-		*lstb = (*lstb)->next;
-		(*lstb)->prev = NULL;
-		swap = *lsta;
-		*lsta = (*lsta)->prev;
-		(*lsta)->next = swap;
-		inst_add_back(instructions, add_inst(PA));
-		while ((*instructions)->prev != NULL)
-			*instructions = (*instructions)->prev;
-	}
-	return (instructions);
+	index = 0;
+	while ()
 }

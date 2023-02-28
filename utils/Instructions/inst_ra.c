@@ -35,5 +35,6 @@ t_inst	**inst_ra(t_list **lsta, t_inst **instructions, int num)
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}
+	pos_reset(lsta);
 	return (instructions);
 }
