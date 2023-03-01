@@ -52,8 +52,8 @@ int main(int argc, char **argv)
 		return (output_insts(lsta, lstb, sort_3(lsta, insts)), 0);
 	else if (count <= 5)
 		return (output_insts(lsta, lstb, sort_5(lsta, lstb, insts, count)), 0);
-	//else if (count <= 100)
-	//	return (output_insts(lsta, lstb, sort_100(lsta, lstb, insts)), 0);
+	else if (count <= 100)
+		return (output_insts(lsta, lstb, sort_100(lsta, lstb, insts, count)), 0);
 	//else 
 	//	return (output_insts(lsta, lstb, sort_500(lsta, lstb, insts)), 0));*/
 }

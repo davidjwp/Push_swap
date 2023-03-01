@@ -12,26 +12,12 @@
 
 #include "../push_swap.h"
 
-t_range	get_range_b(t_range range, t_list **lstb)
-{
-	if (!range.lowest)
-	{
-		range = get_range(range, lstb);
-		range = get_2nd_highest(lstb, range);
-		return (range);
-	}
-	range.highest = range.lowest;
-	range.lowest = 0;
-	range = get_2nd_highest(lstb, range);
-	return (ft_lstfirst(lstb), range);
-}
-
 t_range	range_mid(t_list **lsta, t_range range, int num, int chunks)
 {
 	int	i;
 
 	range.mid = (*lsta)->value;
-	i = num / chunks;
+	i = num / chunks;//this is the problem 
 	while (i)
 	{
 		if ((*lsta)->value > range.mid)
@@ -74,13 +60,17 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int num, int chunks)
 	}
 	return (range);
 }
-
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//23
+/*
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 {
 	t_range	range;
 	int	n;
 
-	n = num / (num / 20);
+	n = num / 20;
+	if (!n)
+		n = num / 2;
+	else
+		n = num / (num / 20);
 	range = range_mid(lsta, range, num, (num / 20));
 	while (n)
 	{
@@ -88,35 +78,69 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//23
 		if ((range.m_pos - range.l_pos) < (range.h_pos - range.m_pos))
 			inst_ra(lsta, insts, (*lsta)->position);
 		else 
-			inst_rra(lsta, insts, ((*lsta)->position - num))
+			inst_rra(lsta, insts, ((*lsta)->position - num));
 		if (*lstb)
 		{
 			if ((*lstb)->value > (*lsta)->value)
 				while ((*lstb)->value > (*lsta)->value)
-					inst_rb( lsta, lstb, insts, 1);
+					inst_rb( lstb, insts, 1);
+		}
+		inst_pb(lsta, lstb, insts, 1);
+		n--;
+	}
+}
+*/
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
+{
+	t_range	range;
+	int	n;
+
+	n = num / 20;//floating point exception, meaning possibly a divide by zero, or other floating point bull
+	if (!n)
+		n = num / 2;
+	else
+		n = num / (num / 20);
+	range = range_mid(lsta, range, num, (num / 20));
+	while (n)
+	{
+		range = get_chunk_range(lsta, range, num, n);
+		if ((range.m_pos - range.l_pos) < (range.h_pos - range.m_pos))
+			inst_ra(lsta, insts, (*lsta)->position);
+		else 
+			inst_rra(lsta, insts, ((*lsta)->position - num));
+		if (*lstb)
+		{
+			if ((*lstb)->value > (*lsta)->value)
+				while ((*lstb)->value > (*lsta)->value)
+					inst_rb( lstb, insts, 1);
 		}
 		inst_pb(lsta, lstb, insts, 1);
 		n--;
 	}
 }
 
-
-t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//30
+t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
-	t_range	range;
+	//debug
+	int	value = (*lsta)->value;
+	
 	int	n;
 
-	**insts = NULL;	
+	*insts = NULL;	
 	while (!check_sort(lsta))
 	{
 		n = num / 20;
+		if (!n)
+			n = 1;
 		while (n)
 		{
-			push_chunk(lsta, lstb, insts, num)
+			push_chunk(lsta, lstb, insts, num);
 			n--;
 		}
-		if (!*lsta)
-			push_to_a(lsta, lstb, range);
+		value = (*lsta)->value;
+		if (!*lsta)//does not go in because lsta still has elements
+			while (num--)
+				push_to_a(lsta, lstb, insts, num);
 	}
 	return(insts);
 }

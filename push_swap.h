@@ -93,6 +93,8 @@ t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 // Main algorithms
 t_inst	**sort_3( t_list **lsta, t_inst **instructions);
 t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
-t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
+t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num);
+void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num);
+
 
 #endif
