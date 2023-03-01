@@ -12,7 +12,8 @@
         "functional": "c",
         "tuple": "c",
         "utility": "c",
-        "variant": "c"
+        "variant": "c",
+        "regex": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

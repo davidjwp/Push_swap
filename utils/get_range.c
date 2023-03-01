@@ -18,14 +18,22 @@ t_range	get_range(t_range range, t_list **list)
 
 	value = (*list)->value;
 	range.highest = (*list)->value;
+	range.h_pos = (*list)->position;
 	range.lowest = (*list)->value;
+	range.l_pos = (*list)->position;
 	while ((*list)->next != NULL)
 	{
 		*list = (*list)->next;
 		if ((*list)->value > range.highest)
+		{
 			range.highest = (*list)->value;
+			range.h_pos = (*list)->position;
+		}
 		else if ((*list)->value < range.lowest)
+		{
 			range.lowest = (*list)->value;
+			range.l_pos = (*list)->position;
+		}
 	}
 	*list = ft_lstfirst(list);
 	return (range);

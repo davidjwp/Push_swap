@@ -12,27 +12,18 @@
 
 #include "../push_swap.h"
 
-t_range	get_range_b(t_range range, t_list **lstb)//18
+t_range	get_range_b(t_range range, t_list **lstb)
 {
-	range.highest = (*lstb)->value;
 	if (!range.lowest)
 	{
 		range = get_range(range, lstb);
-		while ((*lstb)->next != NULL)
-		{
-			if ((*lstb)->value == range.highest)
-				*lstb = (*lstb)->next;
-			range.lowest = (*lstb)->value;
-			if ((*lstb)->value > range.lowest)
-				range.lowest = (*lstb)->value;
-		}
-		ft_lstfirst(lstb);
+		range = get_2nd_highest(lstb, range);
+		return (range);
 	}
-	while ((*lstb)->next != NULL)
-	{
-
-	}
-	return (range);
+	range.highest = range.lowest;
+	range.lowest = 0;
+	range = get_2nd_highest(lstb, range);
+	return (ft_lstfirst(lstb), range);
 }
 
 t_range	range_mid(t_list **lsta, t_range range, int num, int chunks)
@@ -110,7 +101,7 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//23
 }
 
 
-t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
+t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//30
 {
 	t_range	range;
 	int	n;
@@ -124,19 +115,8 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
 			push_chunk(lsta, lstb, insts, num)
 			n--;
 		}
-		//push the biggest from lstb onto lsta
 		if (!*lsta)
-		{
-			range = get_range(range, lstb);
-			n = range.h_pos;
-			while (*lstb)
-			{
-				n = range.h_pos;
-				if ((*lstb)->value != range.highest))
-				if ((*lstb)->value == range.highest)
-				*lstb = (*lstb)->next;
-			}
-		}
+			push_to_a(lsta, lstb, range);
 	}
 	return(insts);
 }
