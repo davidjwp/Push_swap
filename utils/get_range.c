@@ -12,21 +12,21 @@
 
 #include "../push_swap.h"
 
-t_range	get_range(t_range range, t_list **lsta)
+t_range	get_range(t_range range, t_list **list)
 {
 	int	value;
 
-	value = (*lsta)->value;
-	range.highest = (*lsta)->value;
-	range.lowest = (*lsta)->value;
-	while ((*lsta)->next != NULL)
+	value = (*list)->value;
+	range.highest = (*list)->value;
+	range.lowest = (*list)->value;
+	while ((*list)->next != NULL)
 	{
-		*lsta = (*lsta)->next;
-		if ((*lsta)->value > range.highest)
-			range.highest = (*lsta)->value;
-		else if ((*lsta)->value < range.lowest)
-			range.lowest = (*lsta)->value;
+		*list = (*list)->next;
+		if ((*list)->value > range.highest)
+			range.highest = (*list)->value;
+		else if ((*list)->value < range.lowest)
+			range.lowest = (*list)->value;
 	}
-	*lsta = ft_lstfirst(lsta);
+	*list = ft_lstfirst(list);
 	return (range);
 }

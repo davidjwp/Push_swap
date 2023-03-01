@@ -51,6 +51,9 @@ typedef struct range
 	int	highest;
 	int mid;
 	int	lowest;
+	int h_pos;
+	int l_pos;
+	int m_pos;
 } t_range;
 
 // List functions

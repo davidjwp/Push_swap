@@ -2,7 +2,17 @@
     "files.associations": {
         "push_swap.h": "c",
         "type_traits": "c",
-        "limits": "c"
+        "limits": "c",
+        "optional": "c",
+        "istream": "c",
+        "ostream": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "utility": "c",
+        "variant": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
