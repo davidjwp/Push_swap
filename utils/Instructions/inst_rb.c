@@ -14,6 +14,9 @@
 
 t_inst	**inst_rb(t_list **lstb, t_inst **instructions, int num)
 {
+	//debug
+	int VALUE;
+	
 	int	swap1;
 	int	swap2;
 

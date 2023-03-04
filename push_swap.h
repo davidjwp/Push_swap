@@ -69,7 +69,7 @@ int	ft_strcmp(char *str1, char *str2);
 int	ft_isdigit(unsigned char c);
 void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions);
 int	check_sort(t_list **lsta);
-t_range	get_range(t_range range, t_list **lsta);
+t_range	get_range(t_range range, t_list **list);
 char	*get_str(char *str, char *new, int num);
 int	check_args(int argc, char **argv);
 int	parsing_check(t_list **lsta, int argc, char **argv);
@@ -94,7 +94,7 @@ t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 t_inst	**sort_3( t_list **lsta, t_inst **instructions);
 t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num);
-void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num);
+//void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num);
 
 
 #endif
