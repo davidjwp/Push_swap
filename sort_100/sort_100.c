@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-t_range	range_mid(t_list **lsta, t_range range, int num, int chunks)
+/*
+t_range	range_mid(t_list **lsta, t_range range, int num)//19
 {
 	int	i;
 
+	if (!(num / 20))
+		i = num / 2;
+	else
+		i = num / (num / 20);
 	range.mid = (*lsta)->value;
-	i = num / chunks;//this is the problem 
 	while (i)
 	{
 		if ((*lsta)->value > range.mid)
@@ -32,12 +35,9 @@ t_range	range_mid(t_list **lsta, t_range range, int num, int chunks)
 	return (range);
 }
 
-t_range	get_chunk_range(t_list **lsta, t_range range, int num, int chunks)
+t_range	get_chunk_range(t_list **lsta, t_range range, int num, int chunk)
 {
-	int	i;
-
-	i = num / chunks;
-	while (i)
+	while (chunk)
 	{
 		if ((*lsta)->value < range.mid)
 		{
@@ -46,22 +46,20 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int num, int chunks)
 			break;
 		}
 		*lsta = (*lsta)->next;
-		i--;
+		chunk--;
 	}
-	ft_lstfirst(lsta);
-	while ((*lsta)->next != NULL)
+	while ((*lsta)->prev != NULL)
 	{
 		if ((*lsta)->value < range.mid)
 		{
 			range.lowest = (*lsta)->value;
 			range.l_pos = (*lsta)->position;
 		}
-		*lsta = (*lsta)->next;
+		*lsta = (*lsta)->prev;
 	}
 	return (range);
 }
-/*
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
 	t_range	range;
 	int	n;
@@ -71,14 +69,14 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 		n = num / 2;
 	else
 		n = num / (num / 20);
-	range = range_mid(lsta, range, num, (num / 20));
-	while (n)
+	range = range_mid(lsta, range, num);
+	while (n)//push the median at the end 
 	{
-		range = get_chunk_range(lsta, range, num, (num / 20));
+		range = get_chunk_range(lsta, range, num, n);
 		if ((range.m_pos - range.l_pos) < (range.h_pos - range.m_pos))
-			inst_ra(lsta, insts, (*lsta)->position);
+			inst_ra(lsta, insts, range.l_pos);
 		else 
-			inst_rra(lsta, insts, ((*lsta)->position - num));
+			inst_rra(lsta, insts, range.h_pos);
 		if (*lstb)
 		{
 			if ((*lstb)->value > (*lsta)->value)
@@ -89,25 +87,59 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 		n--;
 	}
 }
+
 */
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
+
+int	move_a(t_list **lsta, t_inst **insts, t_range range, int num)
+{
+	if (range.h_pos > (num / 2) || range.l_pos > (num / 2))
+	{
+		if ()
+		{
+			if ((num - range.h_pos) < (num - range.l_pos))
+				return (inst_rra(lsta, insts, (num - range.h_pos)), 0);
+			return (inst_rra(lsta, insts, (num - range.l_pos)), 0);
+		}
+
+	}
+	if (range.h_pos < range.l_pos)
+		return (inst_ra(lsta, insts, range.h_pos), 0);
+	return (inst_ra(lsta, insts, range.l_pos), 0);
+}
+
+t_range	get_chunk_range(t_list **lsta, t_range range, t_inst **insts, int num)//12 you have 13 lines 120
+{
+	if (!range)
+		range = get_range(range, lsta);
+	while ((*lsta)->next != NULL)
+	{
+		if ((*lsta)->value != range.lowest && (*lsta)->value < range.highest)
+		{
+			range.highest = (*lsta)->value;
+			range.h_pos = (*lsta)->position;
+		}
+		*lsta = (*lsta)->next;
+	}
+}
+
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
 {
 	t_range	range;
 	int	n;
 
-	n = num / 20;//floating point exception, meaning possibly a divide by zero, or other floating point bull
+	n = num / 20;
 	if (!n)
 		n = num / 2;
 	else
 		n = num / (num / 20);
-	range = range_mid(lsta, range, num, (num / 20));
+	range = range_mid(lsta, range, num);
 	while (n)
 	{
 		range = get_chunk_range(lsta, range, num, n);
-		if ((range.m_pos - range.l_pos) < (range.h_pos - range.m_pos))
-			inst_ra(lsta, insts, (*lsta)->position);
-		else 
-			inst_rra(lsta, insts, ((*lsta)->position - num));
+		if ((num - range.l_pos) <)
+			inst_ra(lsta, insts, range.l_pos);
+		else if (((num / 2)))
+			inst_rra(lsta, insts, range.h_pos);
 		if (*lstb)
 		{
 			if ((*lstb)->value > (*lsta)->value)
@@ -115,6 +147,21 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 					inst_rb( lstb, insts, 1);
 		}
 		inst_pb(lsta, lstb, insts, 1);
+		n--;
+	}
+}
+
+void	sort_small_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
+{
+	int	n;
+
+	if (!(num / 20))
+		n = (num / 2);
+	else
+		n = 1;
+	while (n)
+	{
+		push_chunk(lsta, lstb, insts, num);
 		n--;
 	}
 }
@@ -130,8 +177,8 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	while (!check_sort(lsta))
 	{
 		n = num / 20;
-		if (!n)
-			n = 1;
+		if (!n || n == 1)
+			sort_small_100(lsta, lstb, insts, num);
 		while (n)
 		{
 			push_chunk(lsta, lstb, insts, num);
