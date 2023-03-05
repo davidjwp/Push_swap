@@ -12,25 +12,6 @@
 
 #include "push_swap.h"
 
-int count_list(t_list **lsta)
-{
-	int num;
-
-	num = 0;
-	while (num < 100)
-	{
-		num++;
-		if ((*lsta)->next == NULL)
-		{
-			*lsta = ft_lstfirst(lsta);
-			return (num);
-		}
-		*lsta = (*lsta)->next;
-	}
-	*lsta = ft_lstfirst(lsta);
-	return (num);
-}
-
 int main(int argc, char **argv)
 {
 	t_list	**lsta;

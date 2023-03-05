@@ -54,5 +54,6 @@ t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 			*instructions = (*instructions)->prev;
 	}
 	pos_reset(lsta);
+	pos_reset(lstb);
 	return (instructions);
 }

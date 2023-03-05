@@ -17,18 +17,18 @@ t_inst	**sort_lsta(t_list **lsta, t_inst **insts, t_range range)
 	range = get_range(range, lsta);
 	if (!check_sort(lsta))
 	{
-		if ((*lsta)->value == range.highest)
+		if ((*lsta)->value == range.high)
 		{
 			*lsta = (*lsta)->next;
-			if ((*lsta)->value == range.lowest)
+			if ((*lsta)->value == range.low)
 				return (inst_ra(lsta, insts, 1));
 			else
 				return (inst_sa(lsta, insts, 1), inst_rra(lsta, insts, 1));
 		}
-		else if ((*lsta)->value == range.lowest)
+		else if ((*lsta)->value == range.low)
 			return (inst_sa(lsta, insts, 1), inst_ra(lsta, insts, 1));
 		*lsta = (*lsta)->next;
-		if ((*lsta)->value == range.highest)
+		if ((*lsta)->value == range.high)
 			return (inst_rra(lsta, insts, 1));
 		else
 			return (inst_sa(lsta, insts, 1));
@@ -47,7 +47,7 @@ int	sort_mid_5(t_list **lsta, t_range range, t_inst **insts)
 		return (inst_sa(lsta, insts, 1), 0);
 	}
 	*lsta = (*lsta)->next;
-	if (range.mid < (*lsta)->value && (*lsta)->value != range.highest)
+	if (range.mid < (*lsta)->value && (*lsta)->value != range.high)
 	{
 		*lsta = ft_lstfirst(lsta);
 		inst_sa(lsta, insts, 1);
@@ -65,11 +65,11 @@ int	sort_mid_5(t_list **lsta, t_range range, t_inst **insts)
 int	check_sa(t_list **lsta, t_inst **insts, t_range range)
 {
 	*lsta = (*lsta)->next;
-	if ((*lsta)->value == range.lowest)
+	if ((*lsta)->value == range.low)
 	{
 		if (check_sort(lsta))
 			return (ft_lstfirst(lsta), inst_sa(lsta, insts, 1), 0);
-		if ((*lsta)->value == range.highest)
+		if ((*lsta)->value == range.high)
 			return(inst_ra(lsta, insts, 1), 0);
 	}
 	return (0);
@@ -90,9 +90,9 @@ t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 		{
 			inst_pa(lsta, lstb, insts, 1);
 			range = get_range(range, lsta);
-			if ((*lsta)->value == range.highest)
+			if ((*lsta)->value == range.high)
 				inst_ra(lsta, insts, 1);
-			else if ((*lsta)->value != range.lowest)
+			else if ((*lsta)->value != range.low)
 				sort_mid_5(lsta, range, insts);
 		}
 	}

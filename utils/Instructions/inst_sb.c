@@ -30,5 +30,6 @@ t_inst	**inst_sb(t_list **lstb, t_inst **instructions, int num)
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}
+	pos_reset(lstb);
 	return (instructions);
 }

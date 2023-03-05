@@ -13,10 +13,7 @@
 #include "../../push_swap.h"
 
 t_inst	**inst_rb(t_list **lstb, t_inst **instructions, int num)
-{
-	//debug
-	int VALUE;
-	
+{	
 	int	swap1;
 	int	swap2;
 
@@ -38,5 +35,6 @@ t_inst	**inst_rb(t_list **lstb, t_inst **instructions, int num)
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}
+	pos_reset(lstb);
 	return (instructions);
 }

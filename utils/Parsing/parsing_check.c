@@ -92,8 +92,10 @@ void	str_to_lst(t_list **lsta, char *str)
 int	parsing_check(t_list **lsta, int argc, char **argv)
 {
 	int	index;
+	int	index2;
 
 	index = 0;
+	index2 = 1;
 	if (argc <= 2)
 	{
 		if(check_str(argv[1]))
@@ -103,8 +105,12 @@ int	parsing_check(t_list **lsta, int argc, char **argv)
 	}
 	else if (check_args(argc, argv))
 	{
-			while (++index < argc)
-				ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index]), index));
+			while (index2 < argc)
+			{
+				ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index2]), index));
+				index++;
+				index2++;
+			}
 			return (1);
 	}
 	return (0);

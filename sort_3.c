@@ -20,18 +20,18 @@ t_inst	**sort_3( t_list **lsta, t_inst **insts)
 	range = get_range(range, lsta);
 	if (!check_sort(lsta))
 	{
-		if ((*lsta)->value == range.highest)
+		if ((*lsta)->value == range.high)
 		{
 			*lsta = (*lsta)->next;
-			if ((*lsta)->value == range.lowest)
+			if ((*lsta)->value == range.low)
 				return (inst_ra(lsta, insts, 1));
 			else
 				return (inst_sa(lsta, insts, 1), inst_rra(lsta, insts, 1));
 		}
-		else if ((*lsta)->value == range.lowest)
+		else if ((*lsta)->value == range.low)
 			return (inst_sa(lsta, insts, 1), inst_ra(lsta, insts, 1));
 		*lsta = (*lsta)->next;
-		if ((*lsta)->value == range.highest)
+		if ((*lsta)->value == range.high)
 			return (inst_rra(lsta, insts, 1));
 		else
 			return (inst_sa(lsta, insts, 1));

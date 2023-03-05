@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pos_reset.c                                        :+:      :+:    :+:   */
+/*   count_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 18:58:50 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/28 18:58:51 by djacobs          ###   ########.fr       */
+/*   Created: 2023/03/05 14:09:56 by djacobs           #+#    #+#             */
+/*   Updated: 2023/03/05 14:09:57 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap.h"
+#include "../push_swap.h"
 
-void	pos_reset(t_list **list)
+int count_list(t_list **list)
 {
-	int	num;
+	int num;
 
 	num = 0;
-	while ("go over list until end")
+	*list = ft_lstfirst(list);
+	while ("loop")
 	{
-		(*list)->position = num++;
+		num++;
 		if ((*list)->next == NULL)
-			break;
+		{
+			*list = ft_lstfirst(list);
+			return (num);
+		}
 		*list = (*list)->next;
 	}
-	ft_lstfirst(list);
 }

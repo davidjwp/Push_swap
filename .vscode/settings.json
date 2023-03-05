@@ -13,7 +13,9 @@
         "tuple": "c",
         "utility": "c",
         "variant": "c",
-        "regex": "c"
+        "regex": "c",
+        "*.tcc": "c",
+        "list": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

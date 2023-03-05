@@ -12,15 +12,21 @@
 
 #include "../../push_swap.h"
 
-void	pos_minus(t_list **lsta)
+t_inst	**last_a(t_list **lsta, t_list **lstb, t_inst **insts)
 {
-	while ((*lsta)->next != NULL)
-	{
-		(*lsta)->position--;
-		*lsta = (*lsta)->next;
-	}
-	(*lsta)->position--;
-	ft_lstfirst(lsta);
+	t_list	*swap;
+
+	(*lstb)->prev = *lsta;
+	*lsta = NULL;
+	swap = *lstb;
+	*lstb = (*lstb)->prev;
+	(*lstb)->next = swap;
+	(*lstb)->prev = NULL;
+	inst_add_back(insts, add_inst(PB));
+	while ((*insts)->prev != NULL)
+		*insts = (*insts)->prev;
+	pos_reset(lstb);
+	return (insts);
 }
 
 t_inst	**no_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
@@ -33,18 +39,21 @@ t_inst	**no_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 	inst_add_back(instructions, add_inst(PB));
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;
+	(*lstb)->position = 0;
 	return (instructions);
 }
 
-t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
+t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)//22
 {
 	t_list	*swap;
-	int	value;
+
 	if (!*lstb)
 	{
 		no_lstb(lsta, lstb, instructions);
 		num--;
 	}
+	if ((*lsta)->next == NULL)
+		return (last_a(lsta, lstb, instructions));
 	while (num--)
 	{
 		(*lstb)->prev = *lsta;
@@ -57,7 +66,8 @@ t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}
-	pos_minus(lsta);
-	(*lsta)->position = 0;
+	pos_reset(lstb);
+	if (*lsta)
+		pos_reset(lsta);
 	return (instructions);
 }

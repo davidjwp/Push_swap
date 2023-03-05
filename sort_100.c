@@ -10,66 +10,71 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
-/*
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
-{
-	t_range	range;
-	int	n;
+#include "push_swap.h"
 
-	n = num / 20;
-	if (!n)
-		n = num / 2;
-	else
-		n = num / (num / 20);
-	range = range_mid(lsta, range, num);
-	while (n)//push the median at the end 
+void	move_b(t_list **lsta, t_list **lstb, t_inst **insts, int num)//18s
+{
+	int	i;
+
+	i = 0;
+	while ("go over")
 	{
-		range = get_chunk_range(lsta, range, num, n);
-		if ((range.m_pos - range.l_pos) < (range.h_pos - range.m_pos))
-			inst_ra(lsta, insts, range.l_pos);
-		else 
-			inst_rra(lsta, insts, range.h_pos);
-		if (*lstb)
+		if ((*lstb)->value > (*lsta)->value && (*lstb)->value < i)
 		{
-			if ((*lstb)->value > (*lsta)->value)
-				while ((*lstb)->value > (*lsta)->value)
-					inst_rb( lstb, insts, 1);
+			*lstb = (*lstb)->prev;
+			i = (*lstb)->position;
+			break;
 		}
-		inst_pb(lsta, lstb, insts, 1);
-		n--;
+		if ((*lstb)->next == NULL)
+			break;
+		*lstb = (*lstb)->next;
+	}
+	ft_lstfirst(lstb);
+	if (i)
+	{
+		if (i > (num / 2))
+			inst_rrb(lstb, insts, (num - i));
+		else 
+			inst_rb(lstb, insts, i);
+		inst_pb(lsta, lstb, insts, 1);//here
 	}
 }
-*/
 
-void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)
+void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 {
 	t_range	range;
+	//debug
+	int topa = 0, topb = 0, r = 0;
 
-	// if (*lsta)
-	// {
-	// 	while ((*lstb)->next != NULL)
-	// 	{
-	// 		*lstb = (*lstb)->next;
-	// 		if ()
-	// 		{
-	// 			range.m_pos = 
-	// 		}
-	// 	}
-	// }
-	while (num--)
+	if (*lsta)
+		move_b(lsta, lstb, insts, num);
+	while (num)
 	{
+		if (*lstb)
+			num = count_list(lstb);
+		else
+			break;
 		range = get_range(range, lstb);
+		while ((*lstb)->position != range.h_pos)//this function causes problems i don't know why lol
+			*lstb = (*lstb)->next;
+		r = (*lstb)->value;
+		ft_lstfirst(lstb);
+		r = range.h_pos;
 		if (range.h_pos > (num / 2))
 			inst_rrb(lstb, insts, (num - range.h_pos));
 		else
 			inst_rb(lstb, insts, range.h_pos);
+		topb = (*lstb)->value;
 		inst_pa(lsta, lstb, insts, 1);
+		topa = (*lsta)->value;
 	}
 }
 
-int	move_a(t_list **lsta, t_inst **insts, t_range range, int num)
+int	move_a(t_list **lsta, t_inst **insts, t_range range, int num)//21
 {
+	int	value = range.h_pos;
+	
+	*lsta = ft_lstfirst(lsta);
 	if (range.h_pos > (num / 2) || range.l_pos > (num / 2))
 	{
 		if (range.h_pos > (num / 2) && range.l_pos > (num / 2))
@@ -80,53 +85,48 @@ int	move_a(t_list **lsta, t_inst **insts, t_range range, int num)
 		}
 		else if (range.l_pos > (num / 2))
 		{
-			if ((num - range.l_pos) < range.h_pos)
-				return (inst_rra(lsta, insts, (num - range.l_pos)), 1);
-			return (inst_ra(lsta, insts, range.h_pos), 1);
+			if ((num - range.l_pos) >= range.h_pos)
+				return (inst_ra(lsta, insts, range.h_pos), 1);
+			return (inst_rra(lsta, insts, (num - range.l_pos)), 1);
 		}
-		if ((num - range.h_pos) < range.l_pos)
-			return (inst_rra(lsta, insts, (num - range.h_pos)), 1);
-		return (inst_ra(lsta, insts, range.l_pos), 1);
+		if ((num - range.h_pos) >= range.l_pos)
+			return (inst_ra(lsta, insts, range.l_pos), 1);
+		return (inst_rra(lsta, insts, (num - range.h_pos)), 1);
 	}
 	if (range.h_pos < range.l_pos)
 		return (inst_ra(lsta, insts, range.h_pos), 1);
 	return (inst_ra(lsta, insts, range.l_pos), 1);
 }
 
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
 {
-	//debug
-	int value;
-
 	t_range	range;
 	int	n;
 
 	n = num / 2;
 	if ((num / 20) > 1)
 		n = num / (num / 20);
-	range = get_range(range, lsta);
 	while (n--)
 	{
-		while ((*lsta)->next != NULL)
+		range = get_range(range, lsta);
+		while ("move to the end of list a until NULL")
 		{
-			*lsta = (*lsta)->next;
-			if ((*lsta)->value != range.lowest && (*lsta)->value < range.highest)
+			if ((*lsta)->value != range.low && (*lsta)->value < range.high)
 			{
-				range.h_pos = (*lsta)->value;
-				range.highest = (*lsta)->value;
+				range.h_pos = (*lsta)->position;
+				range.high = (*lsta)->value;
 			}
+			if ((*lsta)->next == NULL)
+				break;
+			*lsta = (*lsta)->next;
 		}
-		*lsta = ft_lstfirst(lsta);
-		if (move_a(lsta, insts, range, num) && *lstb)
-		{
-			while ((*lstb)->value > (*lsta)->value)
-				inst_rb( lstb, insts, 1);
-		}
+		move_a(lsta, insts, range, count_list(lsta));
+		int current = (*lsta)->value;
 		inst_pb(lsta, lstb, insts, 1);
 	}
 }
 
-t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//18
+t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 {
 	int	n;
 
@@ -142,6 +142,7 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//18
 			n--;
 		}
 		push_to_a(lsta, lstb, insts, num);
+		// while ()//sa 
 	}
 	return(insts);
 }

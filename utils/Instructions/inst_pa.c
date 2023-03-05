@@ -12,17 +12,6 @@
 
 #include "../../push_swap.h"
 
-void	pos_plus(t_list **lsta)
-{
-	while ((*lsta)->next != NULL)
-	{
-		(*lsta)->position++;
-		*lsta = (*lsta)->next;
-	}
-	(*lsta)->position++;
-	ft_lstfirst(lsta);
-}
-
 t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	t_list	*swap;
@@ -37,6 +26,20 @@ t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 	return (instructions);
 }
 
+t_inst	**no_lsta(t_list **lsta, t_list **lstb, t_inst **instructions)
+{
+	*lsta = *lstb;
+	(*lsta)->prev = NULL;
+	*lstb = (*lstb)->next;
+	(*lstb)->prev = NULL;
+	(*lsta)->next = NULL;
+	inst_add_back(instructions, add_inst(PA));
+	while ((*instructions)->prev != NULL)
+		*instructions = (*instructions)->prev;
+	(*lsta)->position = 0;
+	return (instructions);
+}
+
 t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 {
 	t_list	*swap;
@@ -46,6 +49,8 @@ t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 		last_lstb(lsta, lstb, instructions);
 		num--;
 	}
+	if (!*lsta)
+		return (no_lsta(lsta, lstb, instructions));
 	while (num--)
 	{
 		(*lsta)->prev = *lstb;
@@ -58,7 +63,8 @@ t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 		while ((*instructions)->prev != NULL)
 			*instructions = (*instructions)->prev;
 	}
-	pos_plus(lsta);
-	(*lsta)->position = 0;
+	pos_reset(lsta);
+	if (*lstb)
+		pos_reset(lstb);
 	return (instructions);
 }

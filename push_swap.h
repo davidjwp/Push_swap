@@ -48,9 +48,9 @@ typedef struct inst_list
 
 typedef struct range
 {
-	int	highest;
+	int	high;
 	int mid;
-	int	lowest;
+	int	low;
 	int h_pos;
 	int l_pos;
 	int m_pos;
@@ -73,11 +73,12 @@ t_range	get_range(t_range range, t_list **list);
 char	*get_str(char *str, char *new, int num);
 int	check_args(int argc, char **argv);
 int	parsing_check(t_list **lsta, int argc, char **argv);
+int count_list(t_list **list);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);
 void	inst_add_back(t_inst **instlst, t_inst *new_inst);
-void	pos_reset(t_list **lsta);
+void	pos_reset(t_list **list);
 t_inst	**inst_pa(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num);
 t_inst	**inst_ra(t_list **lsta, t_inst **instructions, int num);

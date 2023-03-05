@@ -17,21 +17,21 @@ t_range	get_range(t_range range, t_list **list)
 	int	value;
 
 	value = (*list)->value;
-	range.highest = (*list)->value;
+	range.high = (*list)->value;
 	range.h_pos = (*list)->position;
-	range.lowest = (*list)->value;
+	range.low = (*list)->value;
 	range.l_pos = (*list)->position;
 	while ((*list)->next != NULL)
 	{
 		*list = (*list)->next;
-		if ((*list)->value > range.highest)
+		if ((*list)->value > range.high)
 		{
-			range.highest = (*list)->value;
+			range.high = (*list)->value;
 			range.h_pos = (*list)->position;
 		}
-		else if ((*list)->value < range.lowest)
+		else if ((*list)->value < range.low)
 		{
-			range.lowest = (*list)->value;
+			range.low = (*list)->value;
 			range.l_pos = (*list)->position;
 		}
 	}
