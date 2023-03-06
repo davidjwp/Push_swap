@@ -35,7 +35,7 @@ char	*get_str(char *str, char *new, int num)//19
 		while ((*str >= 48 && *str <= 57) || is_neg(str))
 			str++;
 	}
-	while (*str >= 48 && *str <= 57 || *str == 45)
+	while ((*str >= 48 && *str <= 57) || *str == 45)
 		new[pos++] = *str++;
 	new[pos] = 0;
 	return (new);

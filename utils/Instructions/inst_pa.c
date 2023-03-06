@@ -37,6 +37,9 @@ t_inst	**no_lsta(t_list **lsta, t_list **lstb, t_inst **instructions)
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;
 	(*lsta)->position = 0;
+	pos_reset(lsta);
+	if (*lstb)
+		pos_reset(lstb);
 	return (instructions);
 }
 

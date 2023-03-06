@@ -13,34 +13,35 @@
 
 #include "../../push_swap.h"
 
-int	str_cmp(char *str, int num1, int num2)
+int	str_cmp(char *str, int num1, int num2, int reset)
 {
-	int	sum1;
-	int	sum2;
-
-	sum1 = 0;
-	sum2 = 0;
 	while (str[num1])
 	{
-		while ((str[num1] < 48 || str[num1] > 57) && str[num1] != 45)
+		while (!is_digit(str[num1]))
 			num1++;
-		while (str[num1] >= 48 && str[num1] <= 57 || str[num1] == 45)
-			sum1 += str[num1++];
 		num2 = num1;
+		reset = num1;
 		while (str[num2])
 		{
-			while ((str[num2] < 48 || str[num2] > 57) && str[num2] != 45)
+			while (is_digit(str[num2]) && str[num2])
 				num2++;
-			while (str[num2] >= 48 && str[num2] <= 57 || str[num2] == 45)
-				sum2 += str[num2++];
-			if ((sum1 - sum2) == 0)
+			while (!is_digit(str[num2]) && str[num2])
+				num2++;
+			while (str[num1] == str[num2])
+			{
+				num1++;
+				num2++;
+			}
+			if (str[num1] == str[num2])
 				return (0);
-			sum2 = 0;
+			num1 = reset;
 		}
-		sum1 = 0;
+		while (is_digit(str[num1]))
+			num1++;
 	}
 	return (1);
 }
+
 
 int	check_str(char *str)
 {
@@ -49,7 +50,7 @@ int	check_str(char *str)
 	index1 = 0;
 	if (str[index1] == 45)
 		index1++;
-	while (str[index1] >= 48 && str[index1] <= 57 || str[index1] == 32)
+	while ((str[index1] >= 48 && str[index1] <= 57) || str[index1] == 32)
 	{
 		index1++;
 		if (str[index1] == 45)
@@ -57,7 +58,7 @@ int	check_str(char *str)
 	}
 	if (str[index1])
 		return(0);
-	if (!str_cmp(str, 0, 0))
+	if (!str_cmp(str, 0, 0, 0))
 		return (0);
 	return (1);
 }

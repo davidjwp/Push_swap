@@ -49,7 +49,7 @@ typedef struct inst_list
 typedef struct range
 {
 	int	high;
-	int mid;
+	long int mid;
 	int	low;
 	int h_pos;
 	int l_pos;
@@ -74,6 +74,8 @@ char	*get_str(char *str, char *new, int num);
 int	check_args(int argc, char **argv);
 int	parsing_check(t_list **lsta, int argc, char **argv);
 int count_list(t_list **list);
+t_range	get_chunk_range(t_list **lsta, t_range range, int num);
+int	is_digit(char c);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);

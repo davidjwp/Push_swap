@@ -39,7 +39,7 @@ int	check_digit(char *str)
 		return (0);
 	if (str[index] == 45)
 		index++;
-	while (str[index] >= 48 && str[index] <= 57 || str[index] == 32)
+	while ((str[index] >= 48 && str[index] <= 57) || str[index] == 32)
 	{
 		index++;
 		if (!str[index])

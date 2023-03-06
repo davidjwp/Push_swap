@@ -12,42 +12,39 @@
 
 #include "push_swap.h"
 
-void	move_b(t_list **lsta, t_list **lstb, t_inst **insts, int num)//18s
+void	move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 {
 	int	i;
 
-	i = 0;
+	i = (*lstb)->value;
 	while ("go over")
 	{
-		if ((*lstb)->value > (*lsta)->value && (*lstb)->value < i)
+		*lstb = (*lstb)->next;
+		if ((*lstb)->value < (*lsta)->value && (*lstb)->value < i)
 		{
-			*lstb = (*lstb)->prev;
 			i = (*lstb)->position;
 			break;
 		}
 		if ((*lstb)->next == NULL)
 			break;
-		*lstb = (*lstb)->next;
 	}
 	ft_lstfirst(lstb);
 	if (i)
 	{
-		if (i > (num / 2))
-			inst_rrb(lstb, insts, (num - i));
-		else 
-			inst_rb(lstb, insts, i);
-		inst_pb(lsta, lstb, insts, 1);//here
+		inst_rb(lstb, insts, i);
+		inst_pb(lsta, lstb, insts, 1);
+		inst_rrb(lstb,insts, i);
 	}
+	if (!i)
+		inst_pb(lsta, lstb, insts, 1);
 }
 
 void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 {
 	t_range	range;
-	//debug
-	int topa = 0, topb = 0, r = 0;
 
 	if (*lsta)
-		move_b(lsta, lstb, insts, num);
+		move_b(lsta, lstb, insts);
 	while (num)
 	{
 		if (*lstb)
@@ -55,77 +52,53 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 		else
 			break;
 		range = get_range(range, lstb);
-		while ((*lstb)->position != range.h_pos)//this function causes problems i don't know why lol
+		while ((*lstb)->position != range.h_pos)
 			*lstb = (*lstb)->next;
-		r = (*lstb)->value;
 		ft_lstfirst(lstb);
-		r = range.h_pos;
 		if (range.h_pos > (num / 2))
 			inst_rrb(lstb, insts, (num - range.h_pos));
 		else
 			inst_rb(lstb, insts, range.h_pos);
-		topb = (*lstb)->value;
 		inst_pa(lsta, lstb, insts, 1);
-		topa = (*lsta)->value;
 	}
 }
 
-int	move_a(t_list **lsta, t_inst **insts, t_range range, int num)//21
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 {
-	int	value = range.h_pos;
-	
-	*lsta = ft_lstfirst(lsta);
-	if (range.h_pos > (num / 2) || range.l_pos > (num / 2))
-	{
-		if (range.h_pos > (num / 2) && range.l_pos > (num / 2))
-		{
-			if ((num - range.h_pos) < (num - range.l_pos))
-				return (inst_rra(lsta, insts, (num - range.h_pos)), 1);
-			return (inst_rra(lsta, insts, (num - range.l_pos)), 1);
-		}
-		else if (range.l_pos > (num / 2))
-		{
-			if ((num - range.l_pos) >= range.h_pos)
-				return (inst_ra(lsta, insts, range.h_pos), 1);
-			return (inst_rra(lsta, insts, (num - range.l_pos)), 1);
-		}
-		if ((num - range.h_pos) >= range.l_pos)
-			return (inst_ra(lsta, insts, range.l_pos), 1);
-		return (inst_rra(lsta, insts, (num - range.h_pos)), 1);
-	}
-	if (range.h_pos < range.l_pos)
-		return (inst_ra(lsta, insts, range.h_pos), 1);
-	return (inst_ra(lsta, insts, range.l_pos), 1);
-}
+	//debug
+	int	low, high, pivot, number_of_push = 0;
 
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
-{
 	t_range	range;
 	int	n;
 
 	n = num / 2;
+	range.mid = 2147483647;
 	if ((num / 20) > 1)
 		n = num / (num / 20);
 	while (n--)
 	{
-		range = get_range(range, lsta);
-		while ("move to the end of list a until NULL")
+		range = get_chunk_range(lsta, range, n + 1);
+		pivot = range.mid;
+		high = range.high;
+		low = range.low;
+		high = range.h_pos;
+		high = num - range.h_pos;
+		if ((num - range.h_pos) == range.l_pos)
 		{
-			if ((*lsta)->value != range.low && (*lsta)->value < range.high)
-			{
-				range.h_pos = (*lsta)->position;
-				range.high = (*lsta)->value;
-			}
-			if ((*lsta)->next == NULL)
-				break;
-			*lsta = (*lsta)->next;
+			if (range.low < range.high)
+				inst_ra(lsta, insts, range.l_pos);
+			else
+				inst_rra(lsta, insts, range.l_pos);
 		}
-		move_a(lsta, insts, range, count_list(lsta));
-		int current = (*lsta)->value;
+		else if ((num - range.h_pos) < range.l_pos)
+			inst_rra(lsta, insts, (num - range.h_pos));
+		else
+			inst_ra(lsta, insts, range.l_pos);
 		inst_pb(lsta, lstb, insts, 1);
+		num--;
+		number_of_push++;
 	}
 }
-
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 {
 	int	n;
@@ -139,10 +112,10 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 		while (n)
 		{
 			push_chunk(lsta, lstb, insts, num);
+			// sort_chunk();
 			n--;
 		}
-		push_to_a(lsta, lstb, insts, num);
-		// while ()//sa 
+		push_to_a(lsta, lstb, insts, num); 
 	}
 	return(insts);
 }
