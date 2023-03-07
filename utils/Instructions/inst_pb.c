@@ -32,10 +32,9 @@ t_inst	**last_a(t_list **lsta, t_list **lstb, t_inst **insts)
 t_inst	**no_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	*lstb = *lsta;
-	(*lstb)->prev = NULL;
 	*lsta = (*lsta)->next;
-	(*lsta)->prev = NULL;
 	(*lstb)->next = NULL;
+	(*lsta)->prev = NULL;
 	inst_add_back(instructions, add_inst(PB));
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;
@@ -54,6 +53,7 @@ t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)//
 	}
 	if ((*lsta)->next == NULL)
 		return (last_a(lsta, lstb, instructions));
+	ft_lstfirst(lstb);
 	while (num--)
 	{
 		(*lstb)->prev = *lsta;

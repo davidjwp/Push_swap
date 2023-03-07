@@ -90,6 +90,9 @@ int	sort_b(t_list **lsta, t_list **lstb, t_inst **insts)
 
 void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
 {
+	//debug
+	int	elements_pushed = 0, elements_in_b = 0, test;
+	
 	t_range	range;
 	int	n;
 	int	chunk;
@@ -113,7 +116,10 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
 			inst_rra(lsta, insts, (num - range.h_pos));
 		else
 			inst_ra(lsta, insts, range.l_pos);
+		if (*lstb)
+			test = (*lstb)->value;
 		sort_chunk(lsta, lstb, insts, chunk);
+		elements_pushed++;
 		num--;
 	}
 }
@@ -133,10 +139,12 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 			n = num / 20;
 			chunk = (num / 20);
 		}
-		while (n--)
+		while (--n)
 			push_chunk(lsta, lstb, insts, num);
+		return (insts);
 		sort_chunk(lsta, lstb, insts, chunk);
-		push_to_a(lsta, lstb, insts, num); 
+		push_to_a(lsta, lstb, insts, num);
+		return (insts);
 	}
 	return(insts);
 }

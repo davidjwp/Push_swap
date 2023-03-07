@@ -61,25 +61,26 @@ t_inst	**sort_chunk_up(t_list **lsta, t_inst **insts)//24
 	{
 		if (save < (*lsta)->value)
 		{
+			count++;
 			if ((*lsta)->next == NULL)
 				break;
-			*lsta = (*lsta)->next;		
-			count++;
+			*lsta = (*lsta)->next;
 		}
 		if ((*lsta)->next == NULL)
 			break;
 		*lsta = (*lsta)->next;
 	}
 	save = count;
+	if (!count)
+		return (insts);
 	while (count--)
-	{
 		inst_sa(lsta, insts, 1);
+	while (count++ <= save)
 		inst_ra(lsta, insts, 1);
-	}
 	return (inst_rra(lsta, insts, save));
 }
 
-t_inst	**sort_chunk_down(t_list **lsta, t_list **lstb, t_inst **insts, int chunk)//24
+t_inst	**sort_chunk_down(t_list **lsta, t_list **lstb, t_inst **insts, int chunk)
 {
 	int	save;
 	int	count;
@@ -89,36 +90,35 @@ t_inst	**sort_chunk_down(t_list **lsta, t_list **lstb, t_inst **insts, int chunk
 	while (chunk--)
 	{
 		if (save < (*lstb)->value)
-		{
-			if ((*lstb)->next == NULL)
-				break;
-			*lstb = (*lstb)->next;		
 			count++;
-		}
 		if ((*lstb)->next == NULL)
 			break;
 		*lstb = (*lstb)->next;
 	}
+	if (!count)
+		return (inst_pb(lsta, lstb, insts, 1));
 	save = count;
-	while (count--)
+	while (count)
 	{
 		inst_sb(lstb, insts, 1);
-		inst_rb(lstb, insts, 1);
+		if (count - 1)
+			inst_rb(lstb, insts, 1);
+		count--;
 	}
-	return (inst_rrb(lstb, insts, save), inst_pb(lsta, lstb, insts, 1));
+	return (inst_rrb(lstb, insts, save - 1), inst_pb(lsta, lstb, insts, 1));
 }
 
-int	sort_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int chunk)
+t_inst	**sort_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int chunk)
 {
 	int	num;
-
+	if (*lstb)
+		num = (*lstb)->value;
 	num = count_list(lsta);
 	if (!*lstb)
-		return (inst_pb(lsta, lstb, insts, 1), 0);
+		return (inst_pb(lsta, lstb, insts, 1));
 	if ((*lstb)->next == NULL)
-		return (inst_pb(lsta, lstb, insts, 1), 0);
+		return (inst_pb(lsta, lstb, insts, 1));
 	if (num == chunk || num == chunk + 1)
-		return (sort_chunk_up(lsta, insts), 0);
-	sort_chunk_down(lsta, lstb, insts, chunk);
-	return (0);
+		return (sort_chunk_up(lsta, insts));
+	return (sort_chunk_down(lsta, lstb, insts, chunk));
 }
