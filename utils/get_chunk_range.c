@@ -12,14 +12,10 @@
 
 #include "../push_swap.h"
 
-t_range	get_mid(t_list **lsta, t_range range, int chunk)//22
+t_range	get_mid(t_list **lsta, t_range range, int chunk)
 {
-	// int	n;
 	int	save;
 
-	// n = num / 2;
-	// if ((num / 20 ) > 1)
-	// 	n = num / (num / 20);
 	save = range.low;
 	while (--chunk)
 	{
@@ -40,17 +36,12 @@ t_range	get_mid(t_list **lsta, t_range range, int chunk)//22
 	return (range);
 }
 
-t_range	get_chunk_range(t_list **lsta, t_range range, int chunk)//24
+t_range	get_chunk_range(t_list **lsta, t_range range, int chunk)
 {
-	//debug
-	int	value, number_of_moves = 0;
-	
 	if (range.mid == 2147483647)
 		range = get_mid(lsta, get_range(range, lsta), chunk);
-	value = range.mid;
 	while ("go down the list until you find a piece of chunk")
 	{
-		value = (*lsta)->value;
 		if ((*lsta)->value <= range.mid)
 		{
 			range.low = (*lsta)->value;
@@ -59,12 +50,9 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int chunk)//24
 			break;
 		}
 		*lsta = (*lsta)->next;
-		number_of_moves++;
 	}
-	number_of_moves = 0;
 	while ("go up the list until you find a piece of chunk")
 	{
-		value = (*lsta)->value;
 		if ((*lsta)->value <= range.mid)
 		{
 			range.high = (*lsta)->value;
@@ -73,7 +61,6 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int chunk)//24
 			break;
 		}
 		*lsta = (*lsta)->prev;
-		number_of_moves++;
 	}
 	return (range);
 }

@@ -63,26 +63,45 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 	}
 }
 
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
+int	sort_b(t_list **lsta, t_list **lstb, t_inst **insts)
 {
-	//debug
-	int	low, high, pivot, number_of_push = 0;
+	t_range	range;
+	int	save;
+	int	i;
 
+	if (!*lstb)
+		return (inst_pb(lsta, lstb, insts, 1), 0);
+	if ((*lstb)->next == NULL)
+		return (inst_pb(lsta, lstb, insts, 1), 0);
+	i = count_list(lstb);
+	range = get_range(range, lstb);
+	while (i--)
+	{
+		save = (*lstb)->value;
+		if ((*lstb)->next != NULL)
+			*lstb = (*lstb)->next;
+		else
+			break;
+		if ((*lstb)->value > save)
+			inst_sb(lstb, insts, 1);
+	}
+	return (inst_pb(lsta, lstb, insts, 1), 0);
+}
+
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
+{
 	t_range	range;
 	int	n;
+	int	chunk;
 
 	n = num / 2;
 	range.mid = 2147483647;
 	if ((num / 20) > 1)
 		n = num / (num / 20);
+	chunk = n;
 	while (n--)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
-		pivot = range.mid;
-		high = range.high;
-		low = range.low;
-		high = range.h_pos;
-		high = num - range.h_pos;
 		if ((num - range.h_pos) == range.l_pos)
 		{
 			if (range.low < range.high)
@@ -94,27 +113,29 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 			inst_rra(lsta, insts, (num - range.h_pos));
 		else
 			inst_ra(lsta, insts, range.l_pos);
-		inst_pb(lsta, lstb, insts, 1);
+		sort_chunk(lsta, lstb, insts, chunk);
 		num--;
-		number_of_push++;
 	}
 }
+
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 {
 	int	n;
+	int	chunk;
 
 	*insts = NULL;
 	n = 2;
+	chunk = (num / 2);
 	while (!check_sort(lsta))
 	{
 		if ((num / 20) > 1)
-			n = num / 20;
-		while (n)
 		{
-			push_chunk(lsta, lstb, insts, num);
-			// sort_chunk();
-			n--;
+			n = num / 20;
+			chunk = (num / 20);
 		}
+		while (n--)
+			push_chunk(lsta, lstb, insts, num);
+		sort_chunk(lsta, lstb, insts, chunk);
 		push_to_a(lsta, lstb, insts, num); 
 	}
 	return(insts);
