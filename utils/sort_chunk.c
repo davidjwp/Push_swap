@@ -79,7 +79,7 @@ t_inst	**sort_chunk_up(t_list **lsta, t_inst **insts)//24
 		inst_ra(lsta, insts, 1);
 	return (inst_rra(lsta, insts, save));
 }
-
+//this works but it's really slow, slower than if you didn't sort at all in fact
 t_inst	**sort_chunk_down(t_list **lsta, t_list **lstb, t_inst **insts, int chunk)
 {
 	int	save;
