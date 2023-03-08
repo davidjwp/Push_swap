@@ -12,6 +12,99 @@
 
 #include "push_swap.h"
 
+//sort_b might be useless idk
+// int	sort_b(t_list **lsta, t_list **lstb, t_inst **insts)
+// {
+// 	t_range	range;
+// 	int	save;
+// 	int	i;
+
+// 	if (!*lstb)
+// 		return (inst_pb(lsta, lstb, insts, 1), 0);
+// 	if ((*lstb)->next == NULL)
+// 		return (inst_pb(lsta, lstb, insts, 1), 0);
+// 	i = count_list(lstb);
+// 	range = get_range(range, lstb);
+// 	while (i--)
+// 	{
+// 		save = (*lstb)->value;
+// 		if ((*lstb)->next != NULL)
+// 			*lstb = (*lstb)->next;
+// 		else
+// 			break;
+// 		if ((*lstb)->value > save)
+// 			inst_sb(lstb, insts, 1);
+// 	}
+// 	return (inst_pb(lsta, lstb, insts, 1), 0);
+// }
+
+// void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
+// {	
+// 	t_range	range;
+// 	int	n;
+// 	int	chunk;
+
+// 	n = num / 2;
+// 	range.mid = 2147483647;
+// 	if ((num / 20) > 1)
+// 		n = num / (num / 20);
+// 	chunk = n;
+// 	while (n--)
+// 	{
+// 		range = get_chunk_range(lsta, range, n + 1);
+// 		if ((num - range.h_pos) == range.l_pos)
+// 		{
+// 			if (range.low < range.high)
+// 				inst_ra(lsta, insts, range.l_pos);
+// 			else
+// 				inst_rra(lsta, insts, range.l_pos);
+// 		}
+// 		else if ((num - range.h_pos) < range.l_pos)
+// 			inst_rra(lsta, insts, (num - range.h_pos));
+// 		else
+// 			inst_ra(lsta, insts, range.l_pos);
+// 		sort_chunk(lsta, lstb, insts, chunk);
+// 		//inst_pb(lsta, lstb, insts, 1);
+// 		num--;
+// 	}
+// }
+////////////////////////////////////////////////////////////////////////////////
+
+// void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
+// {	
+// 	t_range	range;
+// 	int	n;
+// 	int	chunk;
+
+// 	range.mid = 2147483647;
+// 	n = num / 2;
+// 	if ((num / 20) > 1)
+// 		n = num / (num / 20);
+// 	chunk = n;
+// 	while (n--)
+// 	{
+// 		if (calculate_moves(lsta, lstb, range, num))
+// 			inst_pb(lsta, lstb, insts, 1);
+// 		else
+// 		{
+// 			if ((num - range.h_pos) == range.l_pos)
+// 			{
+// 				if (range.low < range.high)
+// 					inst_ra(lsta, insts, range.l_pos);
+// 				else
+// 					inst_rra(lsta, insts, range.l_pos);
+// 			}
+// 			else if ((num - range.h_pos) < range.l_pos)
+// 				inst_rra(lsta, insts, (num - range.h_pos));
+// 			else
+// 				inst_ra(lsta, insts, range.l_pos);
+// 		}
+// 		// //sort_chunk(lsta, lstb, insts, chunk);
+// 		inst_pb(lsta, lstb, insts, 1);
+// 		num--;
+// 	}
+// }
+
 void	move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 {
 	int	i;
@@ -63,67 +156,38 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 	}
 }
 
-int	sort_b(t_list **lsta, t_list **lstb, t_inst **insts)
+void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
-	t_range	range;
-	int	save;
-	int	i;
-
-	if (!*lstb)
-		return (inst_pb(lsta, lstb, insts, 1), 0);
-	if ((*lstb)->next == NULL)
-		return (inst_pb(lsta, lstb, insts, 1), 0);
-	i = count_list(lstb);
-	range = get_range(range, lstb);
-	while (i--)
-	{
-		save = (*lstb)->value;
-		if ((*lstb)->next != NULL)
-			*lstb = (*lstb)->next;
-		else
-			break;
-		if ((*lstb)->value > save)
-			inst_sb(lstb, insts, 1);
-	}
-	return (inst_pb(lsta, lstb, insts, 1), 0);
-}
-
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)//24
-{
-	//debug
-	int	elements_pushed = 0, elements_in_b = 0, test;
-	
 	t_range	range;
 	int	n;
-	int	chunk;
-
+	
 	n = num / 2;
 	range.mid = 2147483647;
 	if ((num / 20) > 1)
 		n = num / (num / 20);
-	chunk = n;
 	while (n--)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
-		if ((num - range.h_pos) == range.l_pos)
+		if (*lstb )
+			if ((*lstb)->next != NULL)
+			cal_move(lsta, lstb, insts, range);//something is wrong with the amount you push a to the top 
+		else if ((num - range.h_pos) == range.l_pos)
 		{
 			if (range.low < range.high)
-				inst_ra(lsta, insts, range.l_pos);
-			else
+		 		inst_ra(lsta, insts, range.l_pos);
+		 	else
 				inst_rra(lsta, insts, range.l_pos);
 		}
 		else if ((num - range.h_pos) < range.l_pos)
 			inst_rra(lsta, insts, (num - range.h_pos));
 		else
 			inst_ra(lsta, insts, range.l_pos);
-		if (*lstb)
-			test = (*lstb)->value;
-		sort_chunk(lsta, lstb, insts, chunk);
-		elements_pushed++;
+		// check_b();//maybe check if b is not properly sorted sort it, if calculate move found doubles it doesn't necessarely mean that
+		//the right element is at the top, you might have to push it along just enough to put it in the right spot 
+		inst_pb(lsta, lstb, insts, 1);
 		num--;
 	}
 }
-
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 {
 	int	n;
@@ -139,12 +203,12 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 			n = num / 20;
 			chunk = (num / 20);
 		}
-		while (--n)
+		while (n--)
 			push_chunk(lsta, lstb, insts, num);
 		return (insts);
-		sort_chunk(lsta, lstb, insts, chunk);
+		//sort_chunk(lsta, lstb, insts, chunk);
 		push_to_a(lsta, lstb, insts, num);
-		return (insts);
+		//return (insts);
 	}
 	return(insts);
 }

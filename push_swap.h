@@ -31,6 +31,13 @@
 #define RRB "rrb\n"
 #define RRR "rrr\n"
 
+typedef	struct pack
+{
+	struct node **lsta;
+	struct node **lstb;
+	struct inst_list **insts;
+}				package;
+
 typedef struct node
 {
 	struct node *prev;
@@ -77,6 +84,7 @@ int count_list(t_list **list);
 t_range	get_chunk_range(t_list **lsta, t_range range, int num);
 int	is_digit(char c);
 t_inst	**sort_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int chunk);
+t_inst	**cal_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);
