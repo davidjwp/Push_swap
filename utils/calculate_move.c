@@ -127,30 +127,43 @@ t_inst	**both_ra(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//1
 {
 	//if lsta element is further away than lstb element only do rr for lstb element then finish bringing lsta to top
 	//if not rr till lsta is top then complete for lstb
-	if (range.l_pos > range.m_pos)
-		inst_rr(lsta, lstb, insts, range.m_pos);
-	else
-		inst_rr(lsta, lstb, insts, range.l_pos);
-	while ((*lstb)->value != range.mid)
-		inst_rb(lstb, insts, 1);
-	while ((*lsta)->value != range.low)
-		inst_ra(lsta, insts, 1);
-	return (insts);
-}
+	int	num;
 
-t_inst	**both_rra(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
-{
+	num = count_list(lstb);
 	if (range.l_pos > range.m_pos)
 	{
-		inst_rrr(lsta, lstb, insts, range.m_pos);
-		return (inst_rra(lsta, insts, (range.l_pos - range.m_pos)));
+		inst_rr(lsta, lstb, insts, range.m_pos);
+		return (inst_ra(lsta, insts, (range.l_pos - range.m_pos)));
 	}
 	else if (range.l_pos < range.m_pos)
 	{
-		inst_rrr(lsta, lstb, insts, range.l_pos);
-		return (inst_rrb(lstb, insts, (range.l_pos - range.m_pos)));
+		inst_rr(lsta, lstb, insts, range.l_pos);
+		if (range.m_pos < (num / 2))
+			return (inst_rb(lstb, insts, (range.m_pos - range.h_pos)));
+		return (inst_rrb(lstb, insts, ((num - range.m_pos) - range.h_pos)));
 	}
-	return (inst_rrr(lsta, lstb, insts, range.l_pos));
+	return (inst_rr(lsta, lstb, insts, range.l_pos));
+
+}
+
+t_inst	**both_rra(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//things to change in here 
+{
+	int	num;
+	
+	num = count_list(lstb);
+	if (range.h_pos > (num - range.m_pos))
+	{
+		inst_rrr(lsta, lstb, insts, (num - range.h_pos));
+		return (inst_rra(lsta, insts, ((num - range.h_pos) - range.m_pos)));
+	}
+	else if (range.h_pos < (num - range.m_pos))
+	{
+		inst_rrr(lsta, lstb, insts, range.h_pos);
+		if (range.m_pos < (num / 2))
+			return (inst_rb(lstb, insts, (range.m_pos - range.h_pos)));
+		return (inst_rrb(lstb, insts, ((num - range.m_pos) - range.h_pos)));
+	}
+	return (inst_rrr(lsta, lstb, insts, range.h_pos));
 
 }
 
