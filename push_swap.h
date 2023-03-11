@@ -85,6 +85,8 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int num);
 int	is_digit(char c);
 t_inst	**sort_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int chunk);
 t_inst	**cal_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+int	pre_sort(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);

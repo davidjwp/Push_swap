@@ -158,6 +158,8 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 
 void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
+	int	elements_pushed = 0;
+	
 	t_range	range;
 	int	n;
 	
@@ -168,26 +170,15 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	while (n--)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
-		if (*lstb )
-			if ((*lstb)->next != NULL)
-			cal_move(lsta, lstb, insts, range);//something is wrong with the amount you push a to the top 
-		else if ((num - range.h_pos) == range.l_pos)
-		{
-			if (range.low < range.high)
-		 		inst_ra(lsta, insts, range.l_pos);
-		 	else
-				inst_rra(lsta, insts, range.l_pos);
-		}
-		else if ((num - range.h_pos) < range.l_pos)
-			inst_rra(lsta, insts, (num - range.h_pos));
-		else
-			inst_ra(lsta, insts, range.l_pos);
-		// check_b();//maybe check if b is not properly sorted sort it, if calculate move found doubles it doesn't necessarely mean that
-		//the right element is at the top, you might have to push it along just enough to put it in the right spot 
+		cal_move(lsta, lstb, insts, range);
 		inst_pb(lsta, lstb, insts, 1);
+		elements_pushed++;
+		if (elements_pushed == 13)
+			break;
 		num--;
 	}
 }
+
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 {
 	int	n;
@@ -204,7 +195,10 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 			chunk = (num / 20);
 		}
 		while (n--)
+		{
 			push_chunk(lsta, lstb, insts, num);
+			break;
+		}
 		return (insts);
 		//sort_chunk(lsta, lstb, insts, chunk);
 		push_to_a(lsta, lstb, insts, num);
