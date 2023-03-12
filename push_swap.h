@@ -81,12 +81,8 @@ char	*get_str(char *str, char *new, int num);
 int	check_args(int argc, char **argv);
 int	parsing_check(t_list **lsta, int argc, char **argv);
 int count_list(t_list **list);
-t_range	get_chunk_range(t_list **lsta, t_range range, int num);
 int	is_digit(char c);
 t_inst	**sort_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int chunk);
-t_inst	**cal_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-int	pre_sort(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);
@@ -109,6 +105,19 @@ t_inst	**sort_3( t_list **lsta, t_inst **instructions);
 t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num);
 //void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num);
+
+//sort_100
+t_inst	**cal_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+int	pre_sort(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_range	get_pos(int i, t_list **list, t_range range);
+t_range	get_chunk_range(t_list **lsta, t_range range, int num);
+t_inst	**par_lh(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**par_ll(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**par_lm(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**par_hh(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**par_hl(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**par_hm(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_range	get_brange(t_list **lstb);
 
 
 #endif

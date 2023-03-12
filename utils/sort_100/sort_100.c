@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../../push_swap.h"
 
 //sort_b might be useless idk
 // int	sort_b(t_list **lsta, t_list **lstb, t_inst **insts)
@@ -172,8 +172,7 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
 		cal_move(lsta, lstb, insts, range);
-		inst_pb(lsta, lstb, insts, 1);
-		if (elements_pushed++ == 7)
+		if (elements_pushed++ == 3)
 			break;
 		num--;
 	}
@@ -204,5 +203,6 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 		push_to_a(lsta, lstb, insts, num);
 		//return (insts);
 	}
+	
 	return(insts);
 }
