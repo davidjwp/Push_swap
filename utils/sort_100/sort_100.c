@@ -172,7 +172,7 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
 		cal_move(lsta, lstb, insts, range);
-		if (elements_pushed++ == 3)
+		if (elements_pushed++ == 20)
 			break;
 		num--;
 	}
@@ -203,6 +203,6 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//15
 		push_to_a(lsta, lstb, insts, num);
 		//return (insts);
 	}
-	
+
 	return(insts);
 }

@@ -12,29 +12,40 @@
 
 #include "../../push_swap.h"
 
-t_range	get_pos(int i, t_list **list, t_range range)//25
+// t_range	get_pos(int i, t_list **list, t_range range)//25 this code is broken
+// {
+// 	range.mid = i;
+// 	while ("go over the list")
+// 	{
+// 		if (range.mid > (*list)->value)
+// 		{
+// 			if ((*list)->next == NULL)
+// 			{
+// 				range.m_pos = (*list)->position;
+// 				break;
+// 			}
+// 			*list = (*list)->next;
+// 		}
+// 		if (range.mid < (*list)->value)
+// 		{
+// 			*list = (*list)->prev;
+// 			range.m_pos = (*list)->position + 1;
+// 			break;
+// 		}
+// 		if ((*list)->next == NULL)
+// 			break;
+// 		*list = (*list)->next;
+// 		n++;
+// 	}
+// 	return (ft_lstfirst(list), range);
+// }
+
+t_range	get_pos(int i, t_list **list, t_range range)//25 this code is broken
 {
 	range.mid = i;
 	while ("go over the list")
 	{
-		if (range.mid > (*list)->value)
-		{
-			if ((*list)->next == NULL)
-			{
-				range.m_pos = (*list)->position;
-				break;
-			}
-			*list = (*list)->next;
-		}
-		if (range.mid < (*list)->value)
-		{
-			*list = (*list)->prev;
-			range.m_pos = (*list)->position + 1;
-			break;
-		}
-		if ((*list)->next == NULL)
-			break;
-		*list = (*list)->next;
+
 	}
 	return (ft_lstfirst(list), range);
 }
