@@ -159,7 +159,7 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
 	//debug
-	int	elements_pushed = 0, high, low, high_pos, low_pos;
+	int	elements_pushed = 0;
 	
 	t_range	range;
 	int	n;
@@ -171,13 +171,9 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	while (n--)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
-		high = range.high;
-		low = range.low;
-		high_pos = range.h_pos;
-		low_pos = range.l_pos;
 		cal_move(lsta, lstb, insts, range);
 		inst_pb(lsta, lstb, insts, 1);
-		if (elements_pushed++ == 5)
+		if (elements_pushed++ == 7)
 			break;
 		num--;
 	}
