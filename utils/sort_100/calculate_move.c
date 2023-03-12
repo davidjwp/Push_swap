@@ -225,7 +225,7 @@ int	pre_sort(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
 	return (1);
 }
 
-t_inst	**move_low(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
+t_inst	**move_low(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//24
 {
 	t_range brange;
 	int	num;
@@ -240,7 +240,7 @@ t_inst	**move_low(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
 		if (brange.h_pos < (num / 2))
 			return (par_ll(lsta, lstb, insts, range));
 	}
-	else
+	else if (!(range.low < brange.low) && !(range.low > brange.high))
 	{
 		range = get_pos(range.low, lstb, range);
 		if (range.m_pos < (num / 2))
@@ -256,11 +256,18 @@ t_inst	**move_low(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
 
 t_inst	**move_high(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//24
 {
+	//debug
+	int	mpos, hpos, lpos = range.l_pos, high = range.high, low = range.low;
+	
 	t_range brange;
 	int	num;
 
 	num = count_list(lstb);
+	range.h_pos = (num - range.h_pos);
+	hpos = range.h_pos;
 	brange = get_brange(lstb);
+
+		int blpos = brange.l_pos, bhpos = brange.h_pos;
 	if (brange.l_pos && range.high > brange.high)
 		if (brange.l_pos < (num / 2))
 			return (par_hh(lsta, lstb, insts, range));
@@ -269,9 +276,10 @@ t_inst	**move_high(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)/
 		if (brange.h_pos < (num / 2))
 			return (par_hl(lsta, lstb, insts, range));
 	}
-	else
+	else if (!(range.high < brange.low) && !(range.high > brange.high))
 	{
 		range = get_pos(range.low, lstb, range);
+		mpos = range.m_pos;
 		if (range.m_pos < (num / 2))
 			return (par_hm(lsta, lstb, insts, range));
 		inst_rra(lsta, insts, range.h_pos);
@@ -285,19 +293,27 @@ t_inst	**move_high(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)/
 
 t_inst	**cal_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
 {
+	int	num;
+	t_range	brange;
+
 	if (!pre_sort(lsta, lstb, insts, range))
 		return (inst_pb(lsta, lstb, insts, 1));
 	else
 	{
-		if (range.h_pos == range.l_pos)
+		brange = get_brange(lstb);
+		num = count_list(lsta);
+		if ((num - range.h_pos) == range.l_pos && range.h_pos)
 		{
 			if (range.high < range.low)
 				return (move_high(lsta, lstb, insts, range));
 			return (move_low(lsta, lstb, insts, range));
 		}
-		else if (range.h_pos < range.l_pos)
+		else if ((num - range.h_pos) < range.l_pos && range.h_pos)
+		{
 			return (move_high(lsta, lstb, insts, range));
-		return (move_low(lsta, lstb, insts, range));
+		}
+		else if ((num - range.h_pos) > range.l_pos && range.h_pos)
+			return (move_low(lsta, lstb, insts, range));
 	}
-	return (insts);
+	return (inst_pb(lsta, lstb, insts, 1));
 }
