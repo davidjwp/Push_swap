@@ -20,6 +20,14 @@ which would be faster.
 
 now for what's fucked:
 
+-   the sort 3 is broken
+
+-   the sort 5 is broken
+
+-   some numbers within 100 crash for some reason
+
+-   the output misses the last instruction
+
 -   in this code the sort 5 can go above the limit of 12 which results in a fail
 
 -   there is a weird thing with stack B where the values are completely wrong, it still works kinda somehow which makes it even weirder
