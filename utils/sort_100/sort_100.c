@@ -172,7 +172,8 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
 		cal_move(lsta, lstb, insts, range);
-		if (elements_pushed++ == 20)
+		go_top(lsta, lstb, insts, range);
+		if (elements_pushed++ == 7)
 			break;
 		num--;
 	}
