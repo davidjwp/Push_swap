@@ -111,13 +111,8 @@ t_inst	**cal_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
 int	pre_sort(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
 t_range	get_pos(int i, t_list **list, t_range range);
 t_range	get_chunk_range(t_list **lsta, t_range range, int num);
-t_inst	**par_lh(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-t_inst	**par_ll(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-t_inst	**par_lm(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-t_inst	**par_hh(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-t_inst	**par_hl(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
-t_inst	**par_hm(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**h_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
+t_inst	**l_move(t_list **lsta, t_list **lstb, t_inst **insts, t_range range);
 t_range	get_brange(t_list **lstb);
-
 
 #endif

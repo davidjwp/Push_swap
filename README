@@ -1,0 +1,41 @@
+there are two versions of my push swap, the finished and unfinished.
+
+the way the finished version works is by finding the fastest way to send the right elements from stack A to stack B
+then when stack A is empty push the biggest of stack b until stack B is empty.
+
+This method works well but is a bit slow, it does not make use of double movements like RRR or RR thus it could be much faster.
+
+The other push swap does not work and i gave up because it was taking me too much FUCKING time, and i couldn't figure out why it doesn't work
+if in the future you want to finish it here is a remind of what it's supposed to do and what is fucked up :
+
+it's supposed to work just like the other except that before shuffling the right element of stack A to the top to send it to stack b
+depending of wether it is gonna be the biggest or smallest of stack B it will check if a double movement is possible, so stack A goes in a direction
+and if that direction and the number of movements gets the right element to the top of stack B, even it there aren't enough movements in that 
+direction for the right element to be put to the top it will check if it would be faster to do it the other way or to do a double movement along stack A
+doing this you would take full advantage of double movement and get a faster sort since you would pre sort in stack B using the movements of stack A
+when time comes to dump everything back to A it will be much faster.
+
+you could either not sort if the movement is not enough thus only doing it if you have double movement, or complete the sort, i really don't know
+which would be faster.
+
+now for what's fucked:
+
+-   in this code the sort 5 can go above the limit of 12 which results in a fail
+
+-   there is a weird thing with stack B where the values are completely wrong, it still works kinda somehow which makes it even weirder
+
+-   the double movement is probably broken or the movements are wrong and badly accounted for
+
+-   because sort 100 didn't work there is no sort 500
+
+-   there is probably a TON of useless functions
+
+-   some instructions might have bad values if you get a neverending loop, if the values are negatives it'll never stop
+
+-   useless functions in the header
+
+-   the makefile uses wildcard which is prohibited(why though ?)
+
+-   the norm is raped
+
+alright good luck lol 

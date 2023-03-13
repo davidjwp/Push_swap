@@ -171,6 +171,7 @@
 int	pre_sort(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//sort first two elements 
 {
 	range.mid = count_list(lsta);
+	int	high = range.high, low = range.low, bhpos = brange.h_pos, blpos = brange.l_pos, hpos = range.h_pos, lpos = range.l_pos;//debug
 	if (!*lstb)
 	{
 		if (range.h_pos == range.l_pos)
@@ -202,16 +203,33 @@ t_inst	**move_low(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//
 	int	num;
 
 	num = count_list(lstb);
+	int	bvalue, bpos;
+
+	while ("checker")
+	{
+		bvalue = (*lstb)->value;
+		bpos = (*lstb)->position;
+		if ((*lstb)->next == NULL)
+			break;
+		*lstb = (*lstb)->next;
+	}
+	ft_lstfirst(lstb);
 	brange = get_brange(lstb);
-	if (brange.l_pos && range.low > brange.high)//biggest and movements are needed
-			return (par_lb(lsta, lstb, insts, range));
-	if (brange.h_pos && range.low < brange.low)//lowest and movements are needed
-			return (par_ll(lsta, lstb, insts, range));
+	if (brange.h_pos && range.low > brange.high)
+	{
+		range.m_pos = brange.h_pos;
+		return (l_move(lsta, lstb, insts, range));
+	}
+	if (brange.l_pos && range.low < brange.low)
+	{
+		range.m_pos = brange.l_pos;
+		return (l_move(lsta, lstb, insts, range));
+	}
 	if (!(range.low < brange.low) && !(range.low > brange.high))//mid
 	{
 		range = get_pos(range.low, lstb, range);
 		if (range.m_pos)
-			return (par_lm(lsta, lstb, insts, range));
+			return (h_move(lsta, lstb, insts, range));
 	}
 	inst_ra(lsta, insts, range.l_pos);
 	return (inst_pb(lsta, lstb, insts, 1));
@@ -223,19 +241,34 @@ t_inst	**move_high(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)/
 	int	num;
 
 	num = count_list(lstb);
-	brange = get_brange(lstb);
-	if (brange.l_pos && range.high > brange.high)//biggest and movements are needed
+	int	bvalue, bpos;
+
+	while ("checker")
 	{
-		range.m_pos = (num - brange.high);
-		return (par_hb(lsta, lstb, insts, range));
+		bvalue = (*lstb)->value;
+		bpos = (*lstb)->position;
+		if ((*lstb)->next == NULL)
+			break;
+		*lstb = (*lstb)->next;
 	}
-	if (brange.h_pos && range.high < brange.low)//lowest and movements are needed
-		return (par_hl(lsta, lstb, insts, range));
+	ft_lstfirst(lstb);
+	brange = get_brange(lstb);
+	int	high = range.high, low = range.low, bhpos = brange.h_pos, blpos = brange.l_pos, hpos = range.h_pos, lpos = range.l_pos;;//debug
+	if (brange.h_pos && range.high > brange.high)//biggest and movements are needed
+	{
+		range.m_pos = brange.h_pos;
+		return (h_move(lsta, lstb, insts, range));
+	}
+	if (brange.l_pos && range.high < brange.low)//lowest and movements are needed
+	{
+		range.m_pos = brange.l_pos;
+		return (h_move(lsta, lstb, insts, range));
+	}
 	if (!(range.high < brange.low) && !(range.high > brange.high))//mid
 	{
 		range = get_pos(range.low, lstb, range);
 		if (range.m_pos)
-			return (par_hm(lsta, lstb, insts, range));
+			return (h_move(lsta, lstb, insts, range));
 	}
 	inst_rra(lsta, insts, range.h_pos);
 	return (inst_pb(lsta, lstb, insts, 1));
