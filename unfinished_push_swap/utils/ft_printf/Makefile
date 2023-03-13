@@ -10,23 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME 		= libprintf.a
+SRCS		= ft_printf.c ft_prpspec.c ft_prsspec.c ft_prxmin.c ft_prxupper.c \
+				convert_to_hex_type.c ft_calloc.c ft_strlen.c ft_prdspec.c ft_pruspec.c
 
-NAME 		= push_swap1
-
-PRINTF		= $(wildcard utils/ft_printf/*.c) utils/ft_printf/ft_printf.h
-
-SRCS		= $(PRINTF) $(wildcard utils/Instructions/*.c) $(wildcard utils/*.c) $(wildcard utils/Parsing/*.c) push_swap.h output_insts.c sort_3.c sort_5.c 
+OBJS		= $(SRCS:.c=.o)
 
 CC		= gcc
-CFLAGS		= #-Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 
-#.c.o:
-#	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-all: $(NAME) 
+all: $(NAME)
 
-$(NAME): 
-	$(CC) $(CFLAGS) -g $(SRCS) push_swap.c -o $(NAME)
+$(NAME): $(OBJS)
+	ar rc $@ $(OBJS) && ranlib $@
 
 clean:
 	rm -f $(OBJS)
