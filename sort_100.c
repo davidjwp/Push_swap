@@ -10,33 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../push_swap.h"
-
-//sort_b might be useless idk
-// int	sort_b(t_list **lsta, t_list **lstb, t_inst **insts)
-// {
-// 	t_range	range;
-// 	int	save;
-// 	int	i;
-
-// 	if (!*lstb)
-// 		return (inst_pb(lsta, lstb, insts, 1), 0);
-// 	if ((*lstb)->next == NULL)
-// 		return (inst_pb(lsta, lstb, insts, 1), 0);
-// 	i = count_list(lstb);
-// 	range = get_range(range, lstb);
-// 	while (i--)
-// 	{
-// 		save = (*lstb)->value;
-// 		if ((*lstb)->next != NULL)
-// 			*lstb = (*lstb)->next;
-// 		else
-// 			break;
-// 		if ((*lstb)->value > save)
-// 			inst_sb(lstb, insts, 1);
-// 	}
-// 	return (inst_pb(lsta, lstb, insts, 1), 0);
-// }
+#include "push_swap.h"
 
 void	move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 {
@@ -91,11 +65,13 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
 
 void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
+	int	n;
+	t_range	range;
+
 	n = num / 2;
 	range.mid = 2147483647;
 	if ((num / 20) > 1)
 		n = num / (num / 20);
-	chunk = n;
 	while (n--)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
@@ -131,11 +107,7 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 			chunk = (num / 20);
 		}
 		while (n--)
-		{
 			push_chunk(lsta, lstb, insts, num);
-			break;
-		}
-		return (insts);
 		push_to_a(lsta, lstb, insts, num);
 	}
 	return(insts);

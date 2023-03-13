@@ -51,11 +51,13 @@ void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	if (*instructions == NULL)
 		return (free_all(lsta, lstb, instructions));
+	int	incount = count(instructions);
 	if ((*instructions)->prev == NULL)
 	{
 		ft_printf("%s", (*instructions)->set);
-		while ((*instructions)->next != NULL)
+		while ("go over instructions")
 		{
+			if ((instruction))
 			*instructions = (*instructions)->next;
 			ft_printf("%s", (*instructions)->set);
 		}
