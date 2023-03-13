@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 
-NAME 		= push_swap1
+NAME 		= push_swap
 
 PRINTF		= $(wildcard utils/ft_printf/*.c) utils/ft_printf/ft_printf.h
 

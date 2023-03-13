@@ -20,11 +20,7 @@ which would be faster.
 
 now for what's fucked:
 
--   the sort 3 is broken
-
--   the sort 5 is broken
-
--   some numbers within 100 crash for some reason
+-   numbers withing 90 crash for some reason
 
 -   the output misses the last instruction
 

@@ -110,5 +110,8 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 			push_chunk(lsta, lstb, insts, num);
 		push_to_a(lsta, lstb, insts, num);
 	}
+	inst_add_back(insts, add_inst(PA));
+	while ((*insts)->prev != NULL)
+			*insts = (*insts)->prev;
 	return(insts);
 }

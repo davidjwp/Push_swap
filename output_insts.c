@@ -54,13 +54,13 @@ void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions)
 		return (free_all(lsta, lstb, instructions));
 	if ((*instructions)->prev == NULL)
 	{
-		ft_printf("%s", (*instructions)->set);
 		while ((*instructions)->next != NULL)
 		{
-			*instructions = (*instructions)->next;
 			ft_printf("%s", (*instructions)->set);
+			*instructions = (*instructions)->next;
 		}
 	}
-	ft_printf("%s", (*instructions)->set);
+	if ((*instructions)->next == NULL)
+		ft_printf("%s", (*instructions)->set);
 	free_all(lsta, lstb, instructions);
 }

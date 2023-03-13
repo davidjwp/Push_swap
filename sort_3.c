@@ -18,6 +18,7 @@ t_inst	**sort_3( t_list **lsta, t_inst **insts)
 	
 	*insts = NULL;
 	range = get_range(range, lsta);
+	ft_lstfirst(lsta);
 	if (!check_sort(lsta))
 	{
 		if ((*lsta)->value == range.high)
