@@ -21,6 +21,7 @@ t_inst	**last_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 	*lsta = (*lsta)->prev;
 	(*lsta)->next = swap;
 	*lstb = NULL; 
+	inst_add_back(instructions, add_inst(PA));
 	while ((*instructions)->prev != NULL)
 		*instructions = (*instructions)->prev;
 	return (instructions);

@@ -20,9 +20,11 @@ which would be faster.
 
 now for what's fucked:
 
+-   sort 5 is broken
+
 -   numbers withing 90 crash for some reason
 
--   the output misses the last instruction
+-   the output misses the last instruction on 100
 
 -   in this code the sort 5 can go above the limit of 12 which results in a fail
 
