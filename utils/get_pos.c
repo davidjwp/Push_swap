@@ -22,4 +22,5 @@ t_range	get_pos(int i, t_list **list, t_range range)//25
 	t_range	brange;
 
 	brange = get_range(brange, lstb);
+	
 }

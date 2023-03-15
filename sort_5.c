@@ -129,33 +129,33 @@ int	sort_mid_5(t_list **lsta, t_list **lstb, t_range range, t_inst **insts)//21
 }
 
 ///////////////////////////////////////////////////////////////////////////////#
-t_inst	**out_scope(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
+t_inst	**out_scope(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//22
 {
 	t_range	Srange;
 	t_range	Brange;
 
 	Srange = get_sec(lsta, range);
 	Brange = get_range(range, lstb);
-	if (range.low < Brange.low)//this should work for if one is in A check the other
+	if (range.low < Brange.low)//good
 	{
 		if (Brange.high < range.high)
 		{
-			if (range.h_pos && Brange.h_pos)
-				inst_rrr(lsta, lstb, insts, 1);
-			else
-				inst_rra(lsta, insts, 1);
+			if (Brange.h_pos)
+				return (inst_rrr(lsta, lstb, insts, 1));
+			return (inst_rra(lsta, insts, 1));
 		}
-		else if (Brange.h_pos)
-			inst_rb(lstb, insts, 1);
+		return (inst_rb(lstb, insts, Brange.h_pos));
 	}
-	else
-		inst_
-	return (inst_pa(lsta, lstb, insts, 1));
+	else if (Brange.high < range.high)//good
+	{
+		if (Brange.h_pos)
+			return (inst_rrr(lsta, lstb, insts, 1));
+		return (inst_rra(lsta, insts, 1));
+	}
+	return (inst_rb(lstb, insts, Brange.l_pos));//good
 }
-		// if (range.low < Brange.low)
-		// 	inst_ra(lsta, insts, range.l_pos);//might not be the right instuctions
 
-t_inst	**sort_rest(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//18
+t_inst	**sort_rest(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)//27
 {
 	t_range	Srange;
 	t_range	Brange;
@@ -164,17 +164,26 @@ t_inst	**sort_rest(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)/
 	num = count_list(lsta);
 	Srange = get_sec(lsta, range);
 	Brange = get_range(range, lstb);
-	if (Srange.high > Brange.high)
+	if (Srange.high > Brange.high)//out of scope repeats comes back here and go through the first condition 
 	{
 		if (Srange.low < Brange.low)
-			inst_ra(lsta, insts, range.l_pos);
-		else
-			inst_rra(lsta, insts, (num - Srange.l_pos));
+		{
+			if ((num - Srange.l_pos) < Srange.l_pos)
+				inst_rra(lsta, insts, (num - Sange.l_pos));
+			else
+				inst_ra(lsta, insts, range.l_pos);
+		}
+		else//good
+		{
+			inst_rr(lsta, lstb, insts, Brange.l_pos);
+			if ((*lsta)->value != Srange.low)
+				inst_rra(lsta, insts, Srange.l_pos);
+		}
 	}
 	else if (Srange.low < Brange.low)
-		return (low_scope());
+		low_scope();//wip
 	else 
-		return (out_scope(lsta, lstb, insts, range));
+		out_scope(lsta, lstb, insts, range);
 	return (inst_pa(lsta, lstb, insts, 1));
 }
 
