@@ -101,10 +101,10 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
 	chunk = (num / 2);
 	while (!check_sort(lsta))
 	{
-		if ((num / ) > 1)
+		if ((num / 20) > 1)
 		{
-			n = num / 50;
-			chunk = (num / 50);
+			n = num / 20;
+			chunk = (num / 20);
 		}
 		while (n--)
 			big_push_chunk(lsta, lstb, insts, num);
