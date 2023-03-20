@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-t_range	get_sec(t_list	**list, t_range range)
+t_range	get_sec(t_list **list, t_range range)//23
 {
 	t_range	Srange;
  
@@ -20,12 +20,13 @@ t_range	get_sec(t_list	**list, t_range range)
 	Srange.low = range.high;
 	while ("go through the list")
 	{
-		if ((*list)->value == range.high)
+		while ((*list)->value == range.high || (*list)->value == range.low)//if lowest then highest 
+		{
 			if ((*list)->next != NULL)
 				*list = (*list)->next;
-		if ((*list)->value -- range.low)
-			if ((*list)->next != NULL)
-				*list = (*list)->next;
+			else if ((*list)->next == NULL)
+				return (ft_lstfirst(list), Srange);
+		}
 		if ((*list)->value < Srange.low)
 		{
 			Srange.low = (*list)->value;

@@ -84,6 +84,7 @@ int count_list(t_list **list);
 int	is_digit(char c);
 t_range	get_chunk_range(t_list **lsta, t_range range, int chunk);
 t_range	get_sec(t_list	**list, t_range range);
+t_inst	**put_back(t_list **lsta, t_inst **insts, t_range range);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);
@@ -107,4 +108,6 @@ t_inst	**sort_5(t_list **lsta, t_list **lstb, t_inst **instructions, int argc);
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num);
 //void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num);
 
+//other
+void	check_list(t_list **lst);
 #endif

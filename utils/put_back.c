@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_pos.c                                          :+:      :+:    :+:   */
+/*   put_back.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 14:23:41 by djacobs           #+#    #+#             */
-/*   Updated: 2023/03/14 14:23:43 by djacobs          ###   ########.fr       */
+/*   Created: 2023/03/20 11:24:15 by djacobs           #+#    #+#             */
+/*   Updated: 2023/03/20 11:24:16 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	smallest_range(t_list **list, t_range range, int i)
+t_inst	**put_back(t_list **lsta, t_inst **insts, t_range range)
 {
+	int	num;
 
-}
-
-t_range	get_pos(int i, t_list **list, t_range range)//25
-{
-	t_range	brange;
-
-	brange = get_range(brange, lstb);
-	
+	ft_lstfirst(lsta);
+	num = count_list(lsta);
+	range = get_range(range, lsta);
+		//debug
+	int	r_lpos = range.l_pos, r_hpos = range.h_pos;
+	int	r_low= range.low, r_high  = range.high, value;
+	check_list(lsta);
+	if ((num - range.l_pos) < range.l_pos)
+		return (inst_rra(lsta, insts, (num - range.l_pos)));
+	return (inst_ra(lsta, insts, range.l_pos));
 }
