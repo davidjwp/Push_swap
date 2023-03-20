@@ -39,7 +39,7 @@ void	move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 		inst_pb(lsta, lstb, insts, 1);
 }
 
-void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20
+void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)//20 problem with push_to a when betweeb 91 and 99 elements
 {
 	t_range	range;
 
@@ -109,6 +109,7 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 		while (n--)
 			push_chunk(lsta, lstb, insts, num);
 		push_to_a(lsta, lstb, insts, num);
+		return (insts);
 	}
 	inst_add_back(insts, add_inst(PA));
 	while ((*insts)->prev != NULL)
