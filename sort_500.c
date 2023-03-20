@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_100.c                                         :+:      :+:    :+:   */
+/*   sort_500.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:58:28 by djacobs           #+#    #+#             */
-/*   Updated: 2023/02/28 13:58:29 by djacobs          ###   ########.fr       */
+/*   Created: 2023/03/20 18:50:05 by djacobs           #+#    #+#             */
+/*   Updated: 2023/03/20 18:50:06 by djacobs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
+void	big_move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 {
 	int	i;
 
@@ -39,12 +39,12 @@ void	move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 		inst_pb(lsta, lstb, insts, 1);
 }
 
-void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)
+void	big_push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
 	t_range	range;
 
 	if (*lsta)
-		move_b(lsta, lstb, insts);
+		big_move_b(lsta, lstb, insts);
 	while (num)
 	{
 		if (*lstb)
@@ -63,7 +63,7 @@ void	push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	}
 }
 
-void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
+void	big_push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
 	int	n;
 	t_range	range;
@@ -91,7 +91,7 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	}
 }
 
-t_inst	**sort_500(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
+t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
 {
 	int	n;
 	int	chunk;
@@ -101,16 +101,16 @@ t_inst	**sort_500(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
 	chunk = (num / 2);
 	while (!check_sort(lsta))
 	{
-		if ((num / 20) > 1)
+		if ((num / ) > 1)
 		{
-			n = num / 20;
-			chunk = (num / 20);
+			n = num / 50;
+			chunk = (num / 50);
 		}
 		while (n--)
-			push_chunk(lsta, lstb, insts, num);
+			big_push_chunk(lsta, lstb, insts, num);
 		while (*lsta)
 			inst_pb(lsta, lstb, insts, 1);
-		push_to_a(lsta, lstb, insts, num);
+		big_push_to_a(lsta, lstb, insts, num);
 	}
 	inst_add_back(insts, add_inst(PA));
 	while ((*insts)->prev != NULL)
