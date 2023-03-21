@@ -26,7 +26,7 @@ t_range	get_mid(t_list **lsta, t_range range, int chunk)
 				if ((*lsta)->value > range.low)
 					range.mid = (*lsta)->value;
 			if ((*lsta)->next == NULL)
-				break;
+				break ;
 			*lsta = (*lsta)->next;
 		}
 		range.low = range.mid;
@@ -47,7 +47,7 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int chunk)
 			range.low = (*lsta)->value;
 			range.l_pos = (*lsta)->position;
 			ft_lstlast(lsta);
-			break;
+			break ;
 		}
 		*lsta = (*lsta)->next;
 	}
@@ -58,7 +58,7 @@ t_range	get_chunk_range(t_list **lsta, t_range range, int chunk)
 			range.high = (*lsta)->value;
 			range.h_pos = (*lsta)->position;
 			ft_lstfirst(lsta);
-			break;
+			break ;
 		}
 		*lsta = (*lsta)->prev;
 	}

@@ -21,7 +21,7 @@ void	pos_reset(t_list **list)
 	{
 		(*list)->position = num++;
 		if ((*list)->next == NULL)
-			break;
+			break ;
 		*list = (*list)->next;
 	}
 	ft_lstfirst(list);

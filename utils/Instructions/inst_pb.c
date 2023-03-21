@@ -42,7 +42,7 @@ t_inst	**no_lstb(t_list **lsta, t_list **lstb, t_inst **instructions)
 	return (instructions);
 }
 
-t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)//22
+t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 {
 	t_list	*swap;
 
@@ -53,7 +53,6 @@ t_inst	**inst_pb(t_list **lsta, t_list **lstb, t_inst **instructions, int num)//
 	}
 	if ((*lsta)->next == NULL)
 		return (last_a(lsta, lstb, instructions));
-	ft_lstfirst(lstb);
 	while (num--)
 	{
 		(*lstb)->prev = *lsta;

@@ -47,7 +47,6 @@ void	free_all(t_list **lsta, t_list **lstb, t_inst **instructions)
 	ft_instclear(instructions);
 }
 
-
 void	output_insts(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	if (*instructions == NULL)

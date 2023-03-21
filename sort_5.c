@@ -103,7 +103,7 @@ t_inst	**high(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
 		return (inst_ra(lsta, insts, range.l_pos));
 	}
 	inst_rb(lstb, insts, b_range.h_pos);
-	if ((num - Srange.l_pos) < s_range.l_pos)
+	if ((num - s_range.l_pos) < s_range.l_pos)
 		return (inst_rra(lsta, insts, (num - s_range.l_pos)));
 	return (inst_ra(lsta, insts, s_range.l_pos));
 }

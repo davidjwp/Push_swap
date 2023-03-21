@@ -21,7 +21,7 @@ int	ft_strcmp(char *str1, char *str2)
 	index2 = 0;
 	if (!str1 || !str2)
 		return (0);
-	while (str1[index1] == str2[index2])		
+	while (str1[index1] == str2[index2])
 	{
 		index1++;
 		index2++;

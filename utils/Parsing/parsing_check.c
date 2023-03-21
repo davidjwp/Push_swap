@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../push_swap.h"
 
 int	str_cmp(char *str, int num1, int num2, int reset)
@@ -42,10 +41,9 @@ int	str_cmp(char *str, int num1, int num2, int reset)
 	return (1);
 }
 
-
 int	check_str(char *str)
 {
-	int index1;
+	int	index1;
 
 	index1 = 0;
 	if (str[index1] == 45)
@@ -57,7 +55,7 @@ int	check_str(char *str)
 			index1++;
 	}
 	if (str[index1])
-		return(0);
+		return (0);
 	if (!str_cmp(str, 0, 0, 0))
 		return (0);
 	return (1);
@@ -65,9 +63,9 @@ int	check_str(char *str)
 
 void	str_to_lst(t_list **lsta, char *str)
 {
-	int	num2;
-	int	num1;
-	char *new;
+	int		num2;
+	int		num1;
+	char	*new;
 
 	num1 = 0;
 	num2 = 0;
@@ -99,20 +97,20 @@ int	parsing_check(t_list **lsta, int argc, char **argv)
 	index2 = 1;
 	if (argc <= 2)
 	{
-		if(check_str(argv[1]))
-			return(str_to_lst(lsta, argv[1]), 1);
+		if (check_str(argv[1]))
+			return (str_to_lst(lsta, argv[1]), 1);
 		else
 			return (0);
 	}
 	else if (check_args(argc, argv))
 	{
-			while (index2 < argc)
-			{
-				ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index2]), index));
-				index++;
-				index2++;
-			}
-			return (1);
+		while (index2 < argc)
+		{
+			ft_lstadd_back(lsta, ft_lstnew(ft_atoi(argv[index2]), index));
+			index++;
+			index2++;
+		}
+		return (1);
 	}
 	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "../../push_swap.h"
 
-int check_doubles(char *str, char **list, int argc, int pos)
+int	check_doubles(char *str, char **list, int argc, int pos)
 {
 	int	index;
 
@@ -26,13 +26,13 @@ int check_doubles(char *str, char **list, int argc, int pos)
 			index++;
 	}
 	if (index == argc)
-		return(1);
+		return (1);
 	return (0);
 }
 
 int	check_digit(char *str)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	if (!str)
@@ -50,7 +50,7 @@ int	check_digit(char *str)
 
 int	check_args(int argc, char **argv)
 {
-	int index;
+	int	index;
 
 	index = 1;
 	while (check_digit(argv[index]))

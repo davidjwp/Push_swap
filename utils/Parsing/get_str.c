@@ -19,7 +19,7 @@ int	is_neg(char *str)
 	return (0);
 }
 
-char	*get_str(char *str, char *new, int num)//19
+char	*get_str(char *str, char *new, int num)
 {
 	int	pos;
 
@@ -29,7 +29,7 @@ char	*get_str(char *str, char *new, int num)//19
 		while ((*str <= 48 && *str != 45) || *str >= 57)
 			str++;
 		if (!num)
-			break;
+			break ;
 		if ((*str >= 48 && *str <= 57) || is_neg(str))
 			num--;
 		while ((*str >= 48 && *str <= 57) || is_neg(str))

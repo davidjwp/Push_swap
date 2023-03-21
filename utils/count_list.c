@@ -12,9 +12,9 @@
 
 #include "../push_swap.h"
 
-int count_list(t_list **list)
+int	count_list(t_list **list)
 {
-	int num;
+	int	num;
 
 	num = 0;
 	*list = ft_lstfirst(list);
