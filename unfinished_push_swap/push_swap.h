@@ -83,6 +83,7 @@ int	parsing_check(t_list **lsta, int argc, char **argv);
 int count_list(t_list **list);
 int	is_digit(char c);
 t_inst	**sort_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int chunk);
+t_range	get_sec(t_list **list, t_range range);
 
 // Instruction functions
 t_inst	*add_inst(char *set_inst);

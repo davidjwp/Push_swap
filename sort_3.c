@@ -15,7 +15,7 @@
 t_inst	**sort_3( t_list **lsta, t_inst **insts)
 {
 	t_range	range;
-	
+
 	*insts = NULL;
 	range = get_range(range, lsta);
 	ft_lstfirst(lsta);

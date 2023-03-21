@@ -20,21 +20,11 @@ which would be faster.
 
 now for what's fucked:
 
--   sort 5 is broken
-
--   numbers withing 90 crash for some reason
-
--   the output misses the last instruction on 100
-
--   in this code the sort 5 can go above the limit of 12 which results in a fail
-
--   there is a weird thing with stack B where the values are completely wrong, it still works kinda somehow which makes it even weirder
-
 -   the double movement is probably broken or the movements are wrong and badly accounted for
 
 -   because sort 100 didn't work there is no sort 500
 
--   there is probably a TON of useless functions
+-   there is (probably) a TON of useless functions
 
 -   some instructions might have bad values if you get a neverending loop, if the values are negatives it'll never stop
 
@@ -42,7 +32,7 @@ now for what's fucked:
 
 -   the makefile uses wildcard which is prohibited(why though ?)
 
--   the norm is raped
+-   the norm is fucked
 
 alright good luck lol 
 

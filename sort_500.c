@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	big_move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
+void	big_move_b(t_list **lsta, t_list **lstb, t_inst **insts)
 {
 	int	i;
 
@@ -23,17 +23,17 @@ void	big_move_b(t_list **lsta, t_list **lstb, t_inst **insts)//22
 		if ((*lstb)->value < (*lsta)->value && (*lstb)->value < i)
 		{
 			i = (*lstb)->position;
-			break;
+			break ;
 		}
 		if ((*lstb)->next == NULL)
-			break;
+			break ;
 	}
 	ft_lstfirst(lstb);
 	if (i)
 	{
 		inst_rb(lstb, insts, i);
 		inst_pb(lsta, lstb, insts, 1);
-		inst_rrb(lstb,insts, i);
+		inst_rrb(lstb, insts, i);
 	}
 	if (!i)
 		inst_pb(lsta, lstb, insts, 1);
@@ -50,7 +50,7 @@ void	big_push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 		if (*lstb)
 			num = count_list(lstb);
 		else
-			break;
+			break ;
 		range = get_range(range, lstb);
 		while ((*lstb)->position != range.h_pos)
 			*lstb = (*lstb)->next;
@@ -65,13 +65,13 @@ void	big_push_to_a(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 
 void	big_push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
-	int	n;
 	t_range	range;
+	int		n;
 
 	n = num / 2;
 	range.mid = 2147483647;
-	if ((num / 20) > 1)
-		n = num / (num / 20);
+	if ((num / 40) > 1)
+		n = num / (num / 40);
 	while (n--)
 	{
 		range = get_chunk_range(lsta, range, n + 1);
@@ -91,21 +91,16 @@ void	big_push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 	}
 }
 
-t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
+t_inst	**sort_500(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
 	int	n;
-	int	chunk;
 
 	*insts = NULL;
 	n = 2;
-	chunk = (num / 2);
 	while (!check_sort(lsta))
 	{
-		if ((num / 20) > 1)
-		{
-			n = num / 20;
-			chunk = (num / 20);
-		}
+		if ((num / 40) > 1)
+			n = num / 40;
 		while (n--)
 			big_push_chunk(lsta, lstb, insts, num);
 		while (*lsta)
@@ -115,5 +110,5 @@ t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)//21
 	inst_add_back(insts, add_inst(PA));
 	while ((*insts)->prev != NULL)
 			*insts = (*insts)->prev;
-	return(insts);
+	return (insts);
 }
