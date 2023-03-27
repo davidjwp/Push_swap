@@ -12,22 +12,17 @@
 
 #include "../../push_swap.h"
 
-int	check_doubles(char *str, char **list, int argc, int pos)
+void	ft_lstadd_back(t_list **list, t_list *new)
 {
-	int	index;
-
-	index = 1;
-	if (index == pos)
-		index++;
-	while (ft_strcmp(str, list[index]) && index != argc)
+	if (*list == NULL)
+		*list = new;
+	else
 	{
-		index++;
-		if (index == pos)
-			index++;
+		*list = ft_lstlast(list);
+		(*list)->next = new;
+		new->prev = *list;
 	}
-	if (index == argc)
-		return (1);
-	return (0);
+	*list = ft_lstfirst(list);
 }
 
 int	check_digit(char *str)
@@ -48,6 +43,24 @@ int	check_digit(char *str)
 	return (0);
 }
 
+int	check_doubles(char *str, char **list, int argc, int pos)
+{
+	int	index;
+
+	index = 1;
+	if (index == pos)
+		index++;
+	while (ft_strcmp(str, list[index]) && index != argc)
+	{
+		index++;
+		if (index == pos)
+			index++;
+	}
+	if (index == argc)
+		return (1);
+	return (0);
+}
+
 int	check_args(int argc, char **argv)
 {
 	int	index;
@@ -64,4 +77,26 @@ int	check_args(int argc, char **argv)
 	if (index == argc)
 		return (1);
 	return (0);
+}
+
+char	*get_str(char *str, char *new, int num)
+{
+	int	pos;
+
+	pos = 0;
+	while (*str)
+	{
+		while ((*str <= 48 && *str != 45) || *str >= 57)
+			str++;
+		if (!num)
+			break ;
+		if ((*str >= 48 && *str <= 57) || is_neg(str))
+			num--;
+		while ((*str >= 48 && *str <= 57) || is_neg(str))
+			str++;
+	}
+	while ((*str >= 48 && *str <= 57) || *str == 45)
+		new[pos++] = *str++;
+	new[pos] = 0;
+	return (new);
 }

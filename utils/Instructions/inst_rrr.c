@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ints_rrr.c                                         :+:      :+:    :+:   */
+/*   inst_rrr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djacobs <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -54,6 +54,60 @@ t_inst	**inst_rrr(t_list **lsta, t_list **lstb, t_inst **instructions, int num)
 			*instructions = (*instructions)->prev;
 	}
 	pos_reset(lsta);
+	pos_reset(lstb);
+	return (instructions);
+}
+
+t_inst	**inst_rra(t_list **lsta, t_inst **instructions, int num)
+{
+	int	swap1;
+	int	swap2;
+
+	*lsta = ft_lstlast(lsta);
+	while (num--)
+	{
+		ft_lstlast(lsta);
+		while ((*lsta)->prev != NULL)
+		{
+			swap1 = (*lsta)->value;
+			*lsta = (*lsta)->prev;
+			swap2 = (*lsta)->value;
+			(*lsta)->value = swap1;
+			*lsta = (*lsta)->next;
+			(*lsta)->value = swap2;
+			*lsta = (*lsta)->prev;
+		}
+		inst_add_back(instructions, add_inst(RRA));
+		while ((*instructions)->prev != NULL)
+			*instructions = (*instructions)->prev;
+	}
+	pos_reset(lsta);
+	return (instructions);
+}
+
+t_inst	**inst_rrb(t_list **lstb, t_inst **instructions, int num)
+{
+	int	swap1;
+	int	swap2;
+
+	*lstb = ft_lstlast(lstb);
+	while (num--)
+	{
+		ft_lstlast(lstb);
+		while ((*lstb)->prev != NULL)
+		{
+			swap1 = (*lstb)->value;
+			*lstb = (*lstb)->prev;
+			swap2 = (*lstb)->value;
+			(*lstb)->value = swap1;
+			*lstb = (*lstb)->next;
+			(*lstb)->value = swap2;
+			*lstb = (*lstb)->prev;
+		}
+		inst_add_back(instructions, add_inst(RRB));
+		while ((*instructions)->prev != NULL)
+			*instructions = (*instructions)->prev;
+	}
 	pos_reset(lstb);
 	return (instructions);
 }

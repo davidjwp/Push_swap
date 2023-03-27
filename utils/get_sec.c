@@ -16,12 +16,14 @@ t_range	seclow(t_range range, t_list **list)
 {
 	range.low = (*list)->value;
 	range.l_pos = (*list)->position;
+	return (range);
 }
 
 t_range	sechigh(t_range range, t_list **list)
 {
 	range.high = (*list)->value;
 	range.h_pos = (*list)->position;
+	return (range);
 }
 
 t_range	get_sec(t_list **list, t_range range)

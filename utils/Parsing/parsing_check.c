@@ -12,6 +12,18 @@
 
 #include "../../push_swap.h"
 
+t_list	*ft_lstnew(int content, int position)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	node->value = content;
+	node->position = position;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
+}
+
 int	str_cmp(char *str, int num1, int num2, int reset)
 {
 	while (str[num1])
@@ -26,12 +38,12 @@ int	str_cmp(char *str, int num1, int num2, int reset)
 				num2++;
 			while (!is_digit(str[num2]) && str[num2])
 				num2++;
-			while (str[num1] == str[num2])
+			while (str[num1] == str[num2] && is_digit(str[num1]))
 			{
 				num1++;
 				num2++;
 			}
-			if (str[num1] == str[num2])
+			if ((!is_digit(str[num1]) && !is_digit(str[num2])))
 				return (0);
 			num1 = reset;
 		}

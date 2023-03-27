@@ -94,7 +94,6 @@ void	push_chunk(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 t_inst	**sort_100(t_list **lsta, t_list **lstb, t_inst **insts, int num)
 {
 	int	n;
-	int	chunk;
 
 	*insts = NULL;
 	n = 2;

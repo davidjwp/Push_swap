@@ -56,7 +56,7 @@ t_inst	**mix(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)
 		inst_rb(lstb, insts, b_range.l_pos);
 		return (inst_pa(lsta, lstb, insts, 1), inst_rra(lsta, insts, 1));
 	}
-	inst_pa(lsta, lstb, insts, 1);
+	return (inst_pa(lsta, lstb, insts, 1));
 }
 
 t_inst	**low(t_list **lsta, t_list **lstb, t_inst **insts, t_range range)

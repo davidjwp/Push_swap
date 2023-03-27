@@ -10,23 +10,27 @@
 #                                                                              #
 # **************************************************************************** #
 
+CC			= gcc
 
-NAME 		= push_swap
+NAME 		= push_swap 
 
-PRINTF		= $(wildcard utils/ft_printf/*.c) utils/ft_printf/ft_printf.h
+CFLAGS		= -Wall -Wextra -Werror
 
-SRCS		= $(PRINTF) $(wildcard utils/Instructions/*.c) $(wildcard utils/*.c) $(wildcard utils/Parsing/*.c) push_swap.h output_insts.c sort_3.c sort_5.c sort_100.c sort_500.c
+SRCS		= utils/Instructions/inst_pa.c utils/Instructions/inst_pb.c utils/Instructions/inst_pos.c \
+			 utils/Instructions/inst_rr.c utils/Instructions/inst_ss.c utils/Instructions/inst_rrr.c \
+			 utils/Parsing/check_args.c utils/Parsing/parsing_check.c utils/Parsing/parsing_utils.c \
+			 utils/ft_printf.c utils/get_chunk_range.c utils/get_sec.c utils/utils.c output_insts.c \
+			 sort_5.c sort_100.c sort_500.c push_swap.c
 
-CC		= gcc
-CFLAGS		= #-Wall -Wextra -Werror
+OBJS		= $(SRCS:.c=.o)
 
-#.c.o:
-#	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+all: $(NAME)
 
-all: $(NAME) 
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -g push_swap.h $(OBJS) -o $(NAME)
 
-$(NAME): 
-	$(CC) $(CFLAGS) -g $(SRCS) push_swap.c -o $(NAME)
+%.o: %.c
+	$(CC) -c -g $(CFLAGS) $< -o $@
 
 clean:
 	rm -f $(OBJS)
@@ -35,3 +39,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: fclean clean all
