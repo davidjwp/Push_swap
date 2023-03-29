@@ -64,22 +64,14 @@ int	main(int argc, char **argv)
 	t_list	**lstb;
 	t_inst	**insts;
 	int		count;
-	int *arg;
-	arg = &argv;
-	char idk = *argv;
 
 	lsta = malloc(sizeof(t_list));
 	lstb = malloc(sizeof(t_list));
 	insts = malloc(sizeof(t_inst));
 	*lsta = NULL;
 	*lstb = NULL;
-	if (argc == 1)
-	{
-			free(lsta); 
-			free(lstb);
-			free(insts);
-			return (0);
-	}
+	if (argc == 1 || !argv[1][0])
+		return (free(lsta), free(lstb), free(insts), 0);
 	if (!parsing_check(lsta, argc, argv))
 		return (free(lsta), free(lstb), free(insts), write(2, "error", 5), 0);
 	count = count_list(lsta);
