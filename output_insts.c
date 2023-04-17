@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+unsigned int	ft_strlen(char *s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
 void	ft_lstclear(t_list **lst)
 {
 	while ((*lst)->next != NULL)
@@ -35,7 +45,10 @@ void	ft_instclear(t_inst **instructions)
 void	free_all(t_list **lsta, t_list **lstb, t_inst **instructions)
 {
 	*lsta = ft_lstfirst(lsta);
-	ft_lstclear(lsta);
+	if (*lsta)
+		ft_lstclear(lsta);
+	else
+		free(lsta);
 	free(lstb);
 	if (*instructions == NULL)
 		return (free(instructions));
@@ -55,11 +68,11 @@ void	out_insts(t_list **lsta, t_list **lstb, t_inst **instructions)
 	{
 		while ((*instructions)->next != NULL)
 		{
-			ft_printf("%s", (*instructions)->set);
+			write (1, (*instructions)->set, ft_strlen((*instructions)->set));
 			*instructions = (*instructions)->next;
 		}
 	}
 	if ((*instructions)->next == NULL)
-		ft_printf("%s", (*instructions)->set);
+		write (1, (*instructions)->set, ft_strlen((*instructions)->set));
 	free_all(lsta, lstb, instructions);
 }

@@ -70,10 +70,11 @@ int	main(int argc, char **argv)
 	insts = malloc(sizeof(t_inst));
 	*lsta = NULL;
 	*lstb = NULL;
+	*insts = NULL;
 	if (argc == 1 || !argv[1][0])
 		return (free(lsta), free(lstb), free(insts), 0);
 	if (!parsing_check(lsta, argc, argv))
-		return (free(lsta), free(lstb), free(insts), write(2, "error", 5), 0);
+		return (free_all(lsta, lstb, insts), write(2, "Error\n", 6), 0);
 	count = count_list(lsta);
 	if (count <= 3)
 		return (out_insts(lsta, lstb, sort_3(lsta, insts)), 0);
